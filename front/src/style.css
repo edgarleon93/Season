@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: #001b2e;
+}
+
+h1 {
+  font-family: 'Oleo Script', cursive;
+}
+
+h2,
+h3 {
+  font-family: 'Bebas Neue', cursive;
+}
+
+p {
+  font-family: 'Manrope', sans-serif;
+}
