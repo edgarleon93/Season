@@ -11,7 +11,7 @@ interface ButtonProps {
 }
 
 const Button = ({ onClick, variant, children }: ButtonProps) => {
-  const classes = classNames('text-md font-bold mt-4 rounded-3xl px-5 py-2.5', {
+  const classes = classNames('text-md mt-4 rounded-3xl px-5 py-2', {
     'border-2 border-red text-red bg-backtext': variant === 'primary',
     'text-white bg-backtext': variant === 'secondary',
     'text-white border-2 border-red bg-backtext': variant === 'tertiary',
