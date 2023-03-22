@@ -14,6 +14,11 @@ import Input from './components/Inputs/Input';
 import TweetBox from './components/TweetBox';
 import SignIn from './components/SignIn/SignIn';
 
+import FirstPage from './page/firstPage';
+
+import Publication from './components/Publication';
+
+
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <BrowserRouter>
@@ -32,6 +37,12 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         />
         <Route path="/TweetBox" element={<TweetBox />} />
         <Route path="/TweetBox" element={<SignIn />} />
+
+
+        <Route path="/FirstPAge" element={<FirstPage />} />
+
+        <Route path="/Publication" element={<Publication />} />
+
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,
