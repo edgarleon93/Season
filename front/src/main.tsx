@@ -10,6 +10,7 @@ import Button from './components/Buttons/Button';
 import InviteButton from './components/Buttons/InviteButton';
 import ButtonComponent from './components/Buttons/IconButton';
 import IconBUtton from './components/Buttons/IconButton';
+import Publication from './components/Publication';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
@@ -23,6 +24,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
           element={<InviteButton onClick={() => console.log('yes')}></InviteButton>}
         />
         <Route path="/Heart" element={<IconBUtton type="heart"></IconBUtton>} />
+        <Route path="/Publication" element={<Publication />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,
