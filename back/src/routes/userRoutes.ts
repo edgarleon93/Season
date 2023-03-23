@@ -1,5 +1,12 @@
 import express, { Router } from 'express';
-import { register, login, getAllUsers, getUserById, updateUserById, deleteUserById } from '../controllers/userControllers';
+import { register, 
+         login,
+         forgotPassword,
+         getAllUsers, 
+         getUserById, 
+         updateUserById, 
+         deleteUserById 
+        } from '../controllers/userControllers';
 
 const router: Router = express.Router();
 
@@ -8,6 +15,9 @@ router.post('/register', register);
 
 // POST /api/login
 router.post('/login', login);
+
+// POST /api/forgot-password
+router.post('/forgot-password', forgotPassword);
 
 // GET /api/all
 router.get('/all', getAllUsers);
