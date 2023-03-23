@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import bcrypt from 'bcryptjs';
+import argon2 from 'argon2';
 import jwt from 'jsonwebtoken';
 import User from '../models/userModels';
 
@@ -10,7 +10,12 @@ const JWT_SECRET = process.env.JWT_SECRET;
 export const register = async (req: Request, res: Response) => {
   try {
     // Récupération des données de l'utilisateur à partir de la requête
-    const { username, name, lastname, email, password } = req.body;
+    const { username, name, lastname, email, password, confirmPassword } = req.body;
+
+    // Vérifiez que les mots de passe sont identiques
+    if (password !== confirmPassword) {
+      return res.status(400).json({ message: 'Passwords do not match' });
+    }
 
     // Vérification si l'utilisateur avec l'adresse e-mail existe déjà
     const existingUserByEmail = await User.findOne({ email });
@@ -34,8 +39,7 @@ export const register = async (req: Request, res: Response) => {
     }
 
     // Hachage du mot de passe
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
+    const hashedPassword = await argon2.hash(password);
 
     // Création du nouvel utilisateur
     const newUser = new User({
@@ -75,7 +79,7 @@ export const login = async (req: Request, res: Response) => {
     }
 
     // Vérification du mot de passe
-    const isPasswordValid = await bcrypt.compare(password, user.password);
+    const isPasswordValid = await argon2.verify(user.password, password);
     if (!isPasswordValid) {
       return res.status(400).json({ message: 'Invalid password' });
     }
@@ -121,6 +125,55 @@ export const getUserById = async (req: Request, res: Response) => {
 
     // Envoi de la réponse avec les données de l'utilisateur
     res.status(200).json(user);
+  } catch (error) {
+    // Gestion des erreurs
+    res.status(500).json({ message: 'Something went wrong' });
+  }
+};
+
+// Mise à jour d'un utilisateur par son ID
+export const updateUserById = async (req: Request, res: Response) => {
+  try {
+    // Récupération de l'ID de l'utilisateur à partir de la requête
+    const { id } = req.params;
+
+    // Récupération des données de l'utilisateur à partir de la requête
+    const { username, name, lastname, email, password, confirmNewPassword } = req.body;
+
+    // Recherche de l'utilisateur dans la base de données
+    const user = await User.findById(id);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Mise à jour des données de l'utilisateur
+    if (username) user.username = username;
+    if (name) user.name = name;
+    if (lastname) user.lastname = lastname;
+    if (email) user.email = email;
+
+    // Si un nouveau mot de passe est fourni, vérifier qu'il correspond au mot de passe confirmé,
+    // le hacher et le mettre à jour
+    if (password) {
+      if (password !== confirmNewPassword) {
+        return res.status(400).json({ message: 'Passwords do not match' });
+      }
+
+      const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
+      if (!passwordRegex.test(password)) {
+        return res.status(400).json({
+          message:
+            'Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one number.',
+        });
+      }
+      user.password = await argon2.hash(password);
+    }
+
+    // Sauvegarde des modifications dans la base de données
+    const updatedUser = await user.save();
+
+    // Envoi de la réponse avec les données de l'utilisateur mis à jour
+    res.status(200).json(updatedUser);
   } catch (error) {
     // Gestion des erreurs
     res.status(500).json({ message: 'Something went wrong' });

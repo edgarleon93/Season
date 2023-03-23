@@ -1,5 +1,5 @@
 import express, { Router } from 'express';
-import { register, login, getAllUsers, getUserById, deleteUserById } from '../controllers/userControllers';
+import { register, login, getAllUsers, getUserById, updateUserById, deleteUserById } from '../controllers/userControllers';
 
 const router: Router = express.Router();
 
@@ -12,10 +12,13 @@ router.post('/login', login);
 // GET /api/all
 router.get('/all', getAllUsers);
 
-// GET /api/:id
-router.get('/:id', getUserById);
+// GET /api/user/:id
+router.get('/user/:id', getUserById);
+
+// PUT /api/:id
+router.put('/user/:id', updateUserById);
 
 // DELETE /api/:id
-router.delete('/:id', deleteUserById);
+router.delete('/user/:id', deleteUserById);
 
 export default router;

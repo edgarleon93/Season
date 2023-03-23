@@ -9,6 +9,9 @@ interface User {
   profilePic?: string;
   followers?: string[];
   followings?: string[];
+  posts?: string[];
+  comments?: string[];
+  likes?: string[];
 }
 
 const userSchema = new mongoose.Schema({
@@ -45,6 +48,22 @@ const userSchema = new mongoose.Schema({
   followings: {
     type: Array,
     default: [],
+  },
+  posts: {
+    type: Array,
+    default: [],
+  },
+  comments: {
+    type: Array,
+    default: [],
+  },
+  likes: {
+    type: Array,
+    default: [],
+  },
+  resetPasswordToken: {
+    type: String,
+    default: "",
   },
 });
 
