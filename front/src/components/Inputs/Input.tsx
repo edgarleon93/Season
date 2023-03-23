@@ -23,12 +23,12 @@ const Input: React.FC<InputProps> = ({ placeholder, variant }) => {
     );
   } else if (variant === 'email') {
     return (
-      <div className="relative  grid justify-items-end">
+      <div className="relative">
         <input
           className="bg-backtext w-78 rounded-3xl px-14 py-2 text-white outline-none"
           placeholder={placeholder}
         />
-        <div className="absolute left-2 top-1/2 ml-3 -translate-y-1/2 transform">
+        <div className="absolute left-2 top-1/2 ml-8 -translate-y-1/2 transform">
           <Mail className=" stroke-1 text-white" />
         </div>
       </div>

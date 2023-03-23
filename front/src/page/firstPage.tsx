@@ -17,10 +17,10 @@ function FirstPage() {
             <h1 className="text-red text-8xl md:text-9xl">Season</h1>
           </div>
           <img className="sm:hidden" src="./img/PPhone.webp" alt="" />
-          <h2 className=" text-center text-3xl tracking-widest text-white md:text-4xl	">
+          <h2 className=" text-center text-3xl tracking-widest text-white md:text-5xl	">
             Add Flavor to your <br /> social media experience.
           </h2>
-          <h2 className="mt-8 text-center text-3xl tracking-widest text-white md:text-4xl	">
+          <h2 className="mt-8 text-center text-3xl tracking-widest text-white md:text-5xl	">
             It's time to spice up <br /> your social life!
           </h2>
           <span className="mt-16 flex justify-center">

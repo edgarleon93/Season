@@ -13,6 +13,7 @@ import IconBUtton from './components/Buttons/IconButton';
 import Input from './components/Inputs/Input';
 import TweetBox from './components/TweetBox';
 import SignIn from './components/SignIn/SignIn';
+import Register from './page/register';
 
 import FirstPage from './page/firstPage';
 
@@ -40,6 +41,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         <Route path="/FirstPAge" element={<FirstPage />} />
 
         <Route path="/Publication" element={<Publication />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,
