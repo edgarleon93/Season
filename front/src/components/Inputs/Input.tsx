@@ -13,7 +13,7 @@ const Input: React.FC<InputProps> = ({ placeholder, variant }) => {
     return (
       <div className="relative">
         <input
-          className="bg-backtext w-78 rounded-3xl px-14 py-2 text-white outline-none"
+          className="bg-backtext w-78 rounded-full px-14 py-2 text-white outline-none sm:w-11/12"
           placeholder={placeholder}
         />
         <div className="absolute left-2 top-1/2 ml-8 -translate-y-1/2 transform">
@@ -25,7 +25,7 @@ const Input: React.FC<InputProps> = ({ placeholder, variant }) => {
     return (
       <div className="relative">
         <input
-          className="bg-backtext w-78 rounded-3xl px-14 py-2 text-white outline-none"
+          className="bg-backtext w-78 rounded-full px-14 py-2 text-white outline-none sm:w-11/12"
           placeholder={placeholder}
         />
         <div className="absolute left-2 top-1/2 ml-8 -translate-y-1/2 transform">
@@ -37,7 +37,7 @@ const Input: React.FC<InputProps> = ({ placeholder, variant }) => {
     return (
       <div className="relative">
         <input
-          className="bg-backtext w-78 rounded-3xl px-14 py-2 text-white outline-none"
+          className="bg-backtext w-78 rounded-full px-14 py-2 text-white outline-none sm:w-11/12"
           placeholder={placeholder}
         />
         <div className="absolute left-2 top-1/2 ml-8 -translate-y-1/2 transform">
