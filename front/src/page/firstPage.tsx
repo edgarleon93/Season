@@ -30,7 +30,7 @@ function FirstPage() {
           </span>
           <p className="mt-3 flex justify-center text-white">
             Already have an account?{' '}
-            <button className="text-red ml-2 underline"> Login</button>{' '}
+            <button className="text-red ml-2 underline"> Login </button>{' '}
           </p>
           <div className="fixed bottom-0 left-0 pb-2 text-white">
             <button className="px-2 text-[0.8rem]">Cookie policy</button>
