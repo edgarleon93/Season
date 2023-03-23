@@ -18,7 +18,6 @@ import FirstPage from './page/firstPage';
 
 import Publication from './components/Publication';
 
-
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <BrowserRouter>
@@ -36,13 +35,11 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
           element={<Input variant="password" placeholder="Username" />}
         />
         <Route path="/TweetBox" element={<TweetBox />} />
-        <Route path="/TweetBox" element={<SignIn />} />
-
+        <Route path="/Signin" element={<SignIn />} />
 
         <Route path="/FirstPAge" element={<FirstPage />} />
 
         <Route path="/Publication" element={<Publication />} />
-
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,

@@ -13,19 +13,19 @@ const Input: React.FC<InputProps> = ({ placeholder, variant }) => {
     return (
       <div className="relative">
         <input
-          className="bg-backtext w-60 rounded-3xl px-14 py-2 text-white outline-none"
+          className="bg-backtext w-78 rounded-3xl px-14 py-2 text-white outline-none"
           placeholder={placeholder}
         />
-        <div className="absolute left-2 top-1/2 ml-3 -translate-y-1/2 transform">
+        <div className="absolute left-2 top-1/2 ml-8 -translate-y-1/2 transform">
           <User className=" stroke-1 text-white" />
         </div>
       </div>
     );
   } else if (variant === 'email') {
     return (
-      <div className="relative">
+      <div className="relative  grid justify-items-end">
         <input
-          className="bg-backtext w-60 rounded-3xl px-14 py-2 text-white outline-none"
+          className="bg-backtext w-78 rounded-3xl px-14 py-2 text-white outline-none"
           placeholder={placeholder}
         />
         <div className="absolute left-2 top-1/2 ml-3 -translate-y-1/2 transform">
@@ -37,10 +37,10 @@ const Input: React.FC<InputProps> = ({ placeholder, variant }) => {
     return (
       <div className="relative">
         <input
-          className="bg-backtext w-60 rounded-3xl px-14 py-2 text-white outline-none"
+          className="bg-backtext w-78 rounded-3xl px-14 py-2 text-white outline-none"
           placeholder={placeholder}
         />
-        <div className="absolute left-2 top-1/2 ml-3 -translate-y-1/2 transform">
+        <div className="absolute left-2 top-1/2 ml-8 -translate-y-1/2 transform">
           <Key className=" stroke-1 text-white" />
         </div>
       </div>

@@ -7,7 +7,7 @@ function FirstPage() {
       <div className="z-5 mt-28 flex justify-center">
         <h1 className="text-red text-8xl">Season</h1>
       </div>
-      <img className="" src="./img/PPhone.png" alt="" />
+      <img className="" src="./img/PPhone.webp" alt="" />
       <h2 className="mx- text-center text-3xl tracking-widest text-white	">
         Add Flavor to your <br /> social media experience
       </h2>
