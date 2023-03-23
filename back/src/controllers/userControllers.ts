@@ -1,6 +1,11 @@
 import { Request, Response } from 'express';
 import argon2 from 'argon2';
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+dotenv.config();
+import Mailgun from 'mailgun.js';
+import formData from 'form-data';
+import crypto from 'crypto';
 import User from '../models/userModels';
 
 // Constante pour le secret JWT
@@ -94,6 +99,49 @@ export const login = async (req: Request, res: Response) => {
   } catch (error) {
     // Gestion des erreurs
     res.status(500).json({ message: 'Something went wrong' });
+  }
+};
+
+const mailgun = new Mailgun(formData);
+const client = mailgun.client({
+  username: 'api',
+  key: process.env.MAILGUN_API_KEY!,
+  url: 'https://api.eu.mailgun.net'
+});
+
+export const forgotPassword = async (req: Request, res: Response) => {
+  try {
+    const { email } = req.body;
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const token = crypto.randomBytes(20).toString('hex');
+    user.resetPasswordToken = token;
+    user.resetPasswordExpires = new Date(Date.now() + 3600000); // 1 hour
+
+    await user.save();
+
+    const resetUrl = `http://localhost:3001/reset-password/${user._id}/${token}`;
+    console.log(resetUrl);
+
+    const msg = {
+      from: 'Season <Seasonprojet@hotmail.com>',
+      to: user.email,
+      subject: 'Password Reset Request',
+      text: `You are receiving this email because you (or someone else) have requested the reset of the password for your account.\n\nPlease click on the following link, or paste this link into your browser to complete the process within one hour of receiving it:\n\n${resetUrl}\n\nIf you did not request this, please ignore this email and your password will remain unchanged.\n`
+    };
+
+    await client.messages.create(process.env.MAILGUN_DOMAIN!, msg)
+      .then(msg => console.log(msg))
+      .catch(err => console.log(err));
+
+    res.status(200).json({ message: 'Password reset email sent' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal server error' });
   }
 };
 
