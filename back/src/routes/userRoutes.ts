@@ -2,6 +2,7 @@ import express, { Router } from 'express';
 import { register, 
          login,
          forgotPassword,
+         resetPassword,
          getAllUsers, 
          getUserById, 
          updateUserById, 
@@ -18,6 +19,9 @@ router.post('/login', login);
 
 // POST /api/forgot-password
 router.post('/forgot-password', forgotPassword);
+
+//POST /api/reset-password
+router.post('/reset-password/:id/:resetPasswordToken', resetPassword);
 
 // GET /api/all
 router.get('/all', getAllUsers);
