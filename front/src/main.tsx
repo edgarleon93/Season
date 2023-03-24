@@ -14,6 +14,7 @@ import Input from './components/Inputs/Input';
 import TweetBox from './components/TweetBox';
 import SignIn from './components/SignIn/SignIn';
 import Register from './page/register';
+import Congrats from './page/congrats';
 
 import FirstPage from './page/firstPage';
 
@@ -42,6 +43,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 
         <Route path="/Publication" element={<Publication />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/Congrats" element={<Congrats />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,
