@@ -17,13 +17,16 @@ import Register from './page/register';
 import Congrats from './page/congrats';
 
 import FirstPage from './page/firstPage';
+import AvatarPAge from './page/avatarPage';
 
 import Publication from './components/Publication';
+import AvatarPicModif from './components/avatarPicModif';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
+        <Route path="/AvatarPicModif" element={<AvatarPicModif />} />
         <Route path="/Sidebar" element={<Sidebar />} />
         <Route path="/Navbar" element={<Navbar />} />
         <Route path="/Button" element={<Button variant="primary">continue</Button>} />
@@ -44,6 +47,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         <Route path="/Publication" element={<Publication />} />
         <Route path="/register" element={<Register />} />
         <Route path="/Congrats" element={<Congrats />} />
+        <Route path="/AvatarPage" element={<AvatarPAge />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,
