@@ -19,11 +19,13 @@ import FirstPage from './page/firstPage';
 import AvatarPAge from './page/avatarPage';
 
 import Publication from './components/Publication';
+import AvatarPicModif from './components/avatarPicModif';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
+        <Route path="/AvatarPicModif" element={<AvatarPicModif />} />
         <Route path="/Sidebar" element={<Sidebar />} />
         <Route path="/Navbar" element={<Navbar />} />
         <Route path="/Button" element={<Button variant="primary">continue</Button>} />
