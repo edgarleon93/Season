@@ -16,6 +16,7 @@ import SignIn from './components/SignIn/SignIn';
 import Register from './page/register';
 
 import FirstPage from './page/firstPage';
+import AvatarPAge from './page/avatarPage';
 
 import Publication from './components/Publication';
 
@@ -42,6 +43,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 
         <Route path="/Publication" element={<Publication />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/AvatarPage" element={<AvatarPAge />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,
