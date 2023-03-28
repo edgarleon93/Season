@@ -1,16 +1,15 @@
-import React from 'react';
 import Button from '../Buttons/Button';
 import { ChevronLeft } from 'react-feather';
 import Input from '../Inputs/Input';
 
-function SignIn() {
+function Register() {
   return (
     <>
       <div className="fixed left-0 top-0 ml-4">
         <Button variant="secondary">
           <div className="flex pr-2.5">
             <ChevronLeft className="mt-1 stroke-1" />
-            Register
+            Login
           </div>
         </Button>
       </div>
@@ -28,20 +27,23 @@ function SignIn() {
         </div>
         <div className="flex items-center justify-center">
           <div className="mx-auto max-w-lg">
-            <h2 className="text-3xl text-white md:text-5xl">WELCOME BACK!</h2>
-            <p className="text-md mt-2 text-center text-white md:mt-4 md:text-xl">
-              Enter your credentials to access your account
+            <h2 className="text-3xl text-white md:text-5xl">CREATE YOUR ACCOUNT</h2>
+            <p className="text-md mx-9 mt-2 text-center text-white md:mt-4 md:text-xl">
+              And start to add some seasoning to your social life!
             </p>
             <div className="mt-12">
               <Input variant="username" placeholder="Username" />
               <div className="mt-5 flex-row">
+                <Input variant="email" placeholder="E-mail" />
+              </div>
+              <div className="mt-5 flex-row">
                 <Input variant="password" placeholder="Password" />
-                <Button variant="fifth">
-                  <p className="text-xs md:ml-24">Forgot password?</p>
-                </Button>
+              </div>
+              <div className="mt-5 flex-row">
+                <Input variant="password" placeholder="Confirm Password" />
               </div>
             </div>
-            <div className=" flex justify-center	">
+            <div className=" flex justify-center">
               <Button variant="tertiary">Continue</Button>
             </div>
           </div>
@@ -51,4 +53,4 @@ function SignIn() {
   );
 }
 
-export default SignIn;
+export default Register;

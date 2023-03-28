@@ -18,7 +18,7 @@ const Button = ({ onClick, variant, children }: ButtonProps) => {
       variant === 'tertiary',
     'text-white border-2 border-white bg-backtext py-2.5  mt-4 px-2.5 ':
       variant === 'quaternary',
-    'text-white underline underline-offset-2 decoration-white bg-transparent text-sm ml-40 px-2.5 hover:decoration-red hover:text-red':
+    'text-white underline underline-offset-2 decoration-white bg-transparent text-sm px-2.5 hover:decoration-red hover:text-red':
       variant === 'fifth',
   });
 
