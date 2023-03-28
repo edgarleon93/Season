@@ -2,7 +2,7 @@ import Button from '../Buttons/Button';
 import { ChevronLeft } from 'react-feather';
 import Input from '../Inputs/Input';
 
-function Register() {
+function StepOne() {
   return (
     <>
       <div className="fixed left-0 top-0 ml-4">
@@ -53,4 +53,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default StepOne;
