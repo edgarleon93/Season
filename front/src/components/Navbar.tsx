@@ -1,34 +1,13 @@
-import react from 'react';
-
-import React from 'react';
+import React, { useState } from 'react';
+import userImg from '../../public/img/avatar1.webp';
 
 export function Navbar() {
-  return (
-    <>
-      <div> hello</div>
-    </>
-  );
-}
-interface NavBarProps {
-  title: string;
-  links: Array<{ href: string; label: string }>;
-}
 
-const NavBar = ({ title, links }: NavBarProps) => {
-  return (
-    
-    <nav>
-      
-      <div className="nav-brand">{title}</div>
-      <ul className="nav-links">
-        {links.map((link) => (
-          <li key={link.href}>
-            <a href={link.href}>{link.label}</a>
-          </li>
-        ))}
-      </ul>
-    </nav>
-  );
-};
+return (
 
-export default NavBar;
+<nav className="bg-bg border-b-2 border-solid border-white px-2 py-5 "> 
+  <div className="container mx-auto flex items-center justify-center"> 
+    <img src={userImg} className="absolute left-10 mr-3 h-9" alt="Flowbite Logo" /> 
+    <a href="/home"> <h1 className="text-red">Season</h1> </a> 
+  </div> 
+</nav> ); }
