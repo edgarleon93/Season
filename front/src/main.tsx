@@ -12,13 +12,11 @@ import IconBUtton from './components/Buttons/IconButton';
 import Input from './components/Inputs/Input';
 import TweetBox from './components/TweetBox';
 
-
-
 import Publication from './components/Publication';
 import AvatarPicModif from './components/Register/avatarPicModif';
 import Index from './page/Index';
-import { LogIn } from './components/LogIn/LogIn';
-import Register from './page/Register';
+import { Log1 } from './components/LogIn/Log1';
+import Register from './page/register';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
@@ -35,7 +33,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         <Route path="/Heart" element={<IconBUtton type="heart"></IconBUtton>} />
 
         <Route path="/TweetBox" element={<TweetBox />} />
-        <Route path="/LogIn" element={<LogIn />} />
+        <Route path="/LogIn" element={<Log1 />} />
 
         <Route path="/Index" element={<Index />} />
 
