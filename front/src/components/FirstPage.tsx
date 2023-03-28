@@ -13,7 +13,7 @@ function FirstPage() {
           />
         </div>
         <div className="sm:w-[60vw]">
-          <div className="mt-28 flex justify-center sm:mt-36 sm:mb-12">
+          <div className="mt-28 flex justify-center max-[385px]:mt-5 sm:mt-36 sm:mb-12">
             <h1 className="text-red text-8xl md:text-9xl">Season</h1>
           </div>
           <img className="sm:hidden" src="./img/PPhone.webp" alt="" />

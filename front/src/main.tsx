@@ -11,16 +11,17 @@ import ButtonComponent from './components/Buttons/IconButton';
 import IconBUtton from './components/Buttons/IconButton';
 import Input from './components/Inputs/Input';
 import TweetBox from './components/TweetBox';
-import FirstPage from './page/Index';
+import Register from './page/register';
 import Publication from './components/Publication';
+import AvatarPicModif from './components/avatarPicModif';
 import Index from './page/Index';
-import Register from './components/Register/Register';
 import { LogIn } from './components/LogIn/LogIn';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
+        <Route path="/AvatarPicModif" element={<AvatarPicModif />} />
         <Route path="/Sidebar" element={<Sidebar />} />
         <Route path="/Navbar" element={<Navbar />} />
         <Route path="/Button" element={<Button variant="primary">continue</Button>} />
@@ -39,7 +40,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         <Route path="/Index" element={<Index />} />
 
         <Route path="/Publication" element={<Publication />} />
-        <Route path="/Register" element={<Register />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,
