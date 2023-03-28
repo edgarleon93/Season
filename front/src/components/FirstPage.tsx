@@ -1,11 +1,11 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import Button from './Buttons/Button';
 
-interface Props {
-  setStep: Dispatch<SetStateAction<number>>;
-}
+// interface Props {
+//   setStep: Dispatch<SetStateAction<number>>;
+// }
 
-function FirstPage({ setStep }: Props) {
+function FirstPage() {
   return (
     <>
       <div className="sm:flex">
@@ -29,7 +29,7 @@ function FirstPage({ setStep }: Props) {
             It's time to spice up <br /> your social life!
           </h2>
           <span className="mt-16 flex justify-center">
-            <Button variant="primary" onClick={() => setStep(1)}>
+            <Button variant="primary">
               <h2 className="px-12 text-3xl">register now !</h2>
             </Button>
           </span>
