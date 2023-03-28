@@ -48,10 +48,14 @@ function StepOne({
     }
   };
 
+  const BackLogIn = () => {
+    window.location.href = '/LogIn';
+  };
+
   return (
     <>
       <div className="fixed left-0 top-0 ml-4">
-        <Button variant="secondary">
+        <Button variant="secondary" onClick={BackLogIn}>
           <div className="flex pr-2.5">
             <ChevronLeft className="mt-1 stroke-1" />
             Login
