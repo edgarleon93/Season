@@ -4,11 +4,12 @@ import { Mail, User, Key } from 'react-feather';
 type InputProps = {
   variant: 'username' | 'email' | 'password' | 'comment';
   placeholder: string;
-  value?: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-const Input: React.FC<InputProps> = ({ placeholder, variant, value, onChange }) => {
+const Input: React.FC<InputProps> = ({ placeholder, variant, value }) => {
+
   if (variant === 'username') {
     return (
       <div className="relative">

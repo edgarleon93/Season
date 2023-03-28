@@ -1,11 +1,22 @@
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import Button from '../Buttons/Button';
 import { ChevronLeft, Key } from 'react-feather';
 import Input from '../Inputs/Input';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-export function LogIn() {
+
+interface Props {
+  setStep: Dispatch<SetStateAction<number>>;
+  password: string;
+  setPassword: Dispatch<SetStateAction<string>>;
+
+  username: string;
+  setUsername: Dispatch<SetStateAction<string>>;
+}
+
+export function LogIn({ username, password, setUsername, setPassword, setStep }) {
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
@@ -25,6 +36,7 @@ export function LogIn() {
       console.error('Error during login:', error);
     }
   };
+
 
   return (
     <>
@@ -56,17 +68,18 @@ export function LogIn() {
             </p>
             <div className="mt-12">
               <Input
+                onChange={(e) => setUsername(e.target.value)}
+                value={username}
                 variant="username"
                 placeholder="Username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
               />
               <div className="mt-5 flex-row">
                 <Input
+                  onChange={(e) => setPassword(e.target.value)}
+                  value={password}
                   variant="password"
                   placeholder="Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+
                 />
                 <Button variant="fifth">
                   <p className="ml-36 text-xs md:pl-40">Forgot password?</p>
