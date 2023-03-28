@@ -1,8 +1,38 @@
+import React, { useState } from 'react';
 import Button from '../Buttons/Button';
 import { ChevronLeft } from 'react-feather';
 import Input from '../Inputs/Input';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function StepOne() {
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const navigate = useNavigate();
+
+  const handleRegister = async (event) => {
+    event.preventDefault();
+
+    try {
+      const response = await axios.post('http://localhost:3001/api/register', {
+        username,
+        email,
+        password,
+        confirmPassword,
+      });
+
+      if (response.data.token) {
+        localStorage.setItem('token', response.data.token);
+        navigate('/login');
+        // Redirigez l'utilisateur vers la page souhaitée après l'enregistrement réussi
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <>
       <div className="fixed left-0 top-0 ml-4">
@@ -32,19 +62,41 @@ function StepOne() {
               And start to add some seasoning to your social life!
             </p>
             <div className="mt-12">
-              <Input variant="username" placeholder="Username" />
+              <Input
+                variant="username"
+                placeholder="Username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
               <div className="mt-5 flex-row">
-                <Input variant="email" placeholder="E-mail" />
+                <Input
+                  variant="email"
+                  placeholder="E-mail"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
               </div>
               <div className="mt-5 flex-row">
-                <Input variant="password" placeholder="Password" />
+                <Input
+                  variant="password"
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
               </div>
               <div className="mt-5 flex-row">
-                <Input variant="password" placeholder="Confirm Password" />
+                <Input
+                  variant="password"
+                  placeholder="Confirm Password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                />
               </div>
             </div>
             <div className=" flex justify-center">
-              <Button variant="tertiary">Continue</Button>
+              <Button variant="tertiary" onClick={handleRegister}>
+                Continue
+              </Button>
             </div>
           </div>
         </div>
