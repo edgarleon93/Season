@@ -1,5 +1,8 @@
-import react from 'react';
-import Button from '~/components/Buttons/Button';
+import React, { useEffect, useState } from 'react';
+import Button from './Buttons/Button';
+import Register from './Register/Register';
+import { LogIn } from './LogIn/LogIn';
+import { redirect } from 'react-router-dom';
 
 function FirstPage() {
   return (
@@ -25,13 +28,15 @@ function FirstPage() {
             It's time to spice up <br /> your social life!
           </h2>
           <span className="mt-16 flex justify-center">
-            <Button variant="primary" onClick={() => console.log('Button clicked')}>
+            <Button variant="primary" onClick={console.log}>
               <h2 className="px-12 text-3xl">register now !</h2>
             </Button>
           </span>
           <p className="mt-3 flex justify-center text-white">
-            Already have an account?{' '}
-            <button className="text-red ml-2 underline"> Login </button>{' '}
+            Already have an account?
+            <button className="hover:text-red hover:decoration-red ml-2 text-white underline">
+              Sign In
+            </button>
           </p>
           <div className="fixed bottom-0 left-0 pb-2 text-white">
             <button className="px-2 text-[0.8rem]">Cookie policy</button>
@@ -41,4 +46,5 @@ function FirstPage() {
     </>
   );
 }
+
 export default FirstPage;
