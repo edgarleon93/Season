@@ -2,6 +2,7 @@ import React from 'react';
 import { ChevronLeft } from 'react-feather';
 import Button from '~/components/Buttons/Button';
 import Input from '~/components/Inputs/Input';
+import NavBar from '~/components/Navbar';
 
 function Register() {
   return (
