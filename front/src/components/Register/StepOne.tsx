@@ -1,8 +1,31 @@
 import Button from '../Buttons/Button';
 import { ChevronLeft } from 'react-feather';
 import Input from '../Inputs/Input';
+import { Dispatch, SetStateAction } from 'react';
 
-function StepOne() {
+interface Props {
+  email: string;
+  setEmail: Dispatch<SetStateAction<string>>;
+  setStep: Dispatch<SetStateAction<number>>;
+  password: string;
+  setPassword: Dispatch<SetStateAction<string>>;
+  confirmPassword: string;
+  setConfirmPassword: Dispatch<SetStateAction<string>>;
+  username: string;
+  setUsername: Dispatch<SetStateAction<string>>;
+}
+
+function StepOne({
+  email,
+  username,
+  setUsername,
+  password,
+  setPassword,
+  confirmPassword,
+  setConfirmPassword,
+  setEmail,
+  setStep,
+}: Props) {
   return (
     <>
       <div className="fixed left-0 top-0 ml-4">
@@ -32,19 +55,45 @@ function StepOne() {
               And start to add some seasoning to your social life!
             </p>
             <div className="mt-12">
-              <Input variant="username" placeholder="Username" />
+              <Input
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
+                variant="username"
+                placeholder="Username"
+              />
               <div className="mt-5 flex-row">
-                <Input variant="email" placeholder="E-mail" />
+                <Input
+                  onChange={(e) => setUsername(e.target.value)}
+                  value={username}
+                  variant="email"
+                  placeholder="E-mail"
+                />
               </div>
               <div className="mt-5 flex-row">
-                <Input variant="password" placeholder="Password" />
+                <Input
+                  onChange={(e) => setPassword(e.target.value)}
+                  value={password}
+                  variant="password"
+                  placeholder="Password"
+                />
               </div>
               <div className="mt-5 flex-row">
-                <Input variant="password" placeholder="Confirm Password" />
+                <Input
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  value={confirmPassword}
+                  variant="password"
+                  placeholder="Confirm Password"
+                />
               </div>
             </div>
             <div className=" flex justify-center">
-              <Button variant="tertiary">Continue</Button>
+              <Button
+                onClick={() => setStep(2)}
+                disabled={!email || !password || !username || !confirmPassword}
+                variant="tertiary"
+              >
+                Continue
+              </Button>
             </div>
           </div>
         </div>
