@@ -1,8 +1,9 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import Button from '../Buttons/Button';
 import { ChevronLeft, Key } from 'react-feather';
 import Input from '../Inputs/Input';
 import axios from 'axios';
+import { useFetch } from '~/hooks/useFetch';
 
 interface Props {
   setStep: Dispatch<SetStateAction<number>>;
@@ -13,7 +14,7 @@ interface Props {
   setUsername: Dispatch<SetStateAction<string>>;
 }
 
-export function Log1({ username, password, setUsername, setPassword, setStep }) {
+export function Log({ username, password, setUsername, setPassword }) {
   const handleLogin = async () => {
     try {
       const response = await axios.post('http://localhost:3001/api/login', {
@@ -29,10 +30,20 @@ export function Log1({ username, password, setUsername, setPassword, setStep }) 
     }
   };
 
+  const onVerifyLogIn = () => {
+    window.location.href = '/home';
+  };
+  const BackRegister = () => {
+    window.location.href = '/Register';
+  };
+  const ForgotPassword = () => {
+    window.location.href = '/ForgotPassword';
+  };
+
   return (
     <>
       <div className="fixed left-0 top-0 ml-4">
-        <Button variant="secondary">
+        <Button variant="secondary" onClick={BackRegister}>
           <div className="flex pr-2.5">
             <ChevronLeft className="mt-1 stroke-1" />
             Register
@@ -71,13 +82,13 @@ export function Log1({ username, password, setUsername, setPassword, setStep }) 
                   variant="password"
                   placeholder="Password"
                 />
-                <Button variant="fifth">
+                <Button variant="fifth" onClick={ForgotPassword}>
                   <p className="ml-36 text-xs md:pl-40">Forgot password?</p>
                 </Button>
               </div>
             </div>
             <div className="flex justify-center">
-              <Button variant="tertiary" onClick={handleLogin}>
+              <Button variant="tertiary" onClick={onVerifyLogIn}>
                 Continue
               </Button>
             </div>

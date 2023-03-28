@@ -1,11 +1,16 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import Button from './Buttons/Button';
-
-// interface Props {
-//   setStep: Dispatch<SetStateAction<number>>;
-// }
+import Register from '~/page/register';
 
 function FirstPage() {
+  const [href, setHref] = useState('/Index');
+  function handleClick() {
+    setHref('/Register');
+  }
+  const BackRegister = () => {
+    window.location.href = '/Register';
+  };
+
   return (
     <>
       <div className="sm:flex">
@@ -28,16 +33,21 @@ function FirstPage() {
           <h2 className="mt-8 text-center text-3xl text-white md:text-5xl	">
             It's time to spice up <br /> your social life!
           </h2>
-          <span className="mt-16 flex justify-center">
+          <span className="mt-5 flex justify-center">
             <Button variant="primary">
-              <h2 className="px-12 text-3xl">register now !</h2>
+              <h2 className="px-12 text-3xl" onClick={BackRegister}>
+                Register Now !
+              </h2>
             </Button>
           </span>
           <p className="mt-3 flex justify-center text-white">
             Already have an account?
-            <button className="hover:text-red hover:decoration-red ml-2 text-white underline">
-              Sign In
-            </button>
+            <a
+              className="hover:text-red hover:decoration-red ml-2 text-white underline"
+              href="/LogIn"
+            >
+              Log In
+            </a>
           </p>
           <div className="fixed bottom-0 left-0 pb-2 text-white">
             <button className="px-2 text-[0.8rem]">Cookie policy</button>
