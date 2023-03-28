@@ -1,6 +1,8 @@
+import React, { useState } from 'react';
 import Button from '../Buttons/Button';
 import { ChevronLeft } from 'react-feather';
 import Input from '../Inputs/Input';
+
 import { Dispatch, SetStateAction } from 'react';
 
 interface Props {
@@ -26,6 +28,39 @@ function StepOne({
   setEmail,
   setStep,
 }: Props) {
+
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
+function StepOne() {
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const navigate = useNavigate();
+
+  const handleRegister = async (event) => {
+    event.preventDefault();
+
+    try {
+      const response = await axios.post('http://localhost:3001/api/register', {
+        username,
+        email,
+        password,
+        confirmPassword,
+      });
+
+      if (response.data.token) {
+        localStorage.setItem('token', response.data.token);
+        navigate('/login');
+        // Redirigez l'utilisateur vers la page souhaitée après l'enregistrement réussi
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+
   return (
     <>
       <div className="fixed left-0 top-0 ml-4">
@@ -56,6 +91,7 @@ function StepOne({
             </p>
             <div className="mt-12">
               <Input
+
                 onChange={(e) => setEmail(e.target.value)}
                 value={email}
                 variant="username"
@@ -67,26 +103,33 @@ function StepOne({
                   value={username}
                   variant="email"
                   placeholder="E-mail"
+
                 />
               </div>
               <div className="mt-5 flex-row">
                 <Input
+
                   onChange={(e) => setPassword(e.target.value)}
                   value={password}
                   variant="password"
                   placeholder="Password"
+
                 />
               </div>
               <div className="mt-5 flex-row">
                 <Input
+
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   value={confirmPassword}
                   variant="password"
                   placeholder="Confirm Password"
+
+
                 />
               </div>
             </div>
             <div className=" flex justify-center">
+
               <Button
                 onClick={() => setStep(2)}
                 disabled={!email || !password || !username || !confirmPassword}
