@@ -16,7 +16,7 @@ const JWT_SECRET = process.env.JWT_SECRET;
 export const register = async (req: Request, res: Response) => {
   try {
     // Récupération des données de l'utilisateur à partir de la requête
-    const { username, name, lastname, email, password, confirmPassword } = req.body;
+    const { username, email, password, confirmPassword } = req.body;
 
     // Vérifiez que les mots de passe sont identiques
     if (password !== confirmPassword) {
@@ -50,8 +50,6 @@ export const register = async (req: Request, res: Response) => {
     // Création du nouvel utilisateur
     const newUser = new User({
       username,
-      name,
-      lastname,
       email,
       password: hashedPassword,
     });
@@ -76,10 +74,10 @@ export const register = async (req: Request, res: Response) => {
 export const login = async (req: Request, res: Response) => {
   try {
     // Récupération des données de connexion à partir de la requête
-    const { email, password } = req.body;
+    const { username, password } = req.body;
 
     // Recherche de l'utilisateur dans la base de données
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ username });
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }

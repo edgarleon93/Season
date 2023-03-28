@@ -34,9 +34,9 @@ mongoose.connection.on('error', (error: string) => {
 mongoose.connection.once('open', () => {
   console.log('🌱 Connected to MongoDB');
 
-  // app.listen(PORT, () => {
-  //   console.log(`🚀 Server ready on port ${PORT}`);
-  // });
+  app.listen(PORT, () => {
+    console.log(`🚀 Server ready on port ${PORT}`);
+  });
 });
 
 export default app;
