@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import Button from './Buttons/Button';
-import Register from './Register/Register';
-import { LogIn } from './LogIn/LogIn';
-import { redirect } from 'react-router-dom';
 
 function FirstPage() {
   return (
