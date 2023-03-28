@@ -1,14 +1,8 @@
 import React from 'react';
-import { ChevronLeft } from 'react-feather';
-import AvatarPicModif from '~/components/avatarPicModif';
-import Button from '~/components/Buttons/Button';
-import Input from '~/components/Inputs/Input';
+import AvatarPicModif from './avatarPicModif';
+import Button from '../Buttons/Button';
 
-function AvatarPage() {
-  const handleAvatarClick = () => {
-    console.log('You chose your avatar');
-  };
-
+function StepTwo() {
   return (
     <>
       <div className="sm:flex">
@@ -40,4 +34,5 @@ function AvatarPage() {
     </>
   );
 }
-export default AvatarPage;
+
+export default StepTwo;
