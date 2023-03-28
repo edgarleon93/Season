@@ -13,6 +13,8 @@ dist-ssr
 *.local
 .env
 .env.development
+__Tests__
+jest.config.js
 
 # Editor directories and files
 .vscode/*

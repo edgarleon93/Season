@@ -117,8 +117,14 @@ export const forgotPassword = async (req: Request, res: Response) => {
     // Récupération de l'adresse email de l'utilisateur depuis la requête
     const { email } = req.body;
 
+    // Vérifie si l'e-mail est présent dans la requête
+    if (!email) {
+      return res.status(400).json({ message: 'Email is required' });
+    }
+    
     // Recherche de l'utilisateur dans la base de données en utilisant son adresse email
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email: req.body.email });
+    console.log('user:', user);
 
     // Si aucun utilisateur n'est trouvé avec cette adresse email, renvoyer une réponse avec un message d'erreur
     if (!user) {
@@ -162,15 +168,17 @@ export const forgotPassword = async (req: Request, res: Response) => {
 
     // Envoie un message en utilisant la bibliothèque Mailgun pour envoyer un e-mail de réinitialisation de mot de passe.
     await client.messages.create(process.env.MAILGUN_DOMAIN!, msg)
-      .then(msg => console.log(msg))
-      .catch(err => console.log(err));
-
-    res.status(200).json({ message: 'Password reset email sent' });
-
-    // Gestion des erreurs
+      .then(msg => {
+      console.log(msg);
+      res.status(200).json({ message: 'Password reset email sent' });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({ message: 'Internal server error' });
+    });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Internal server error' });
+    // Gestion des erreurs
+    res.status(500).json({ message: 'Something went wrong' });
   }
 };
 
