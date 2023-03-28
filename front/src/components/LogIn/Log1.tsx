@@ -3,8 +3,6 @@ import Button from '../Buttons/Button';
 import { ChevronLeft, Key } from 'react-feather';
 import Input from '../Inputs/Input';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-
 
 interface Props {
   setStep: Dispatch<SetStateAction<number>>;
@@ -15,12 +13,7 @@ interface Props {
   setUsername: Dispatch<SetStateAction<string>>;
 }
 
-export function LogIn({ username, password, setUsername, setPassword, setStep }) {
-
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const navigate = useNavigate();
-
+export function Log1({ username, password, setUsername, setPassword, setStep }) {
   const handleLogin = async () => {
     try {
       const response = await axios.post('http://localhost:3001/api/login', {
@@ -30,13 +23,11 @@ export function LogIn({ username, password, setUsername, setPassword, setStep })
 
       if (response.data.token) {
         localStorage.setItem('authToken', response.data.token);
-        navigate('/register');
       }
     } catch (error) {
       console.error('Error during login:', error);
     }
   };
-
 
   return (
     <>
@@ -79,7 +70,6 @@ export function LogIn({ username, password, setUsername, setPassword, setStep })
                   value={password}
                   variant="password"
                   placeholder="Password"
-
                 />
                 <Button variant="fifth">
                   <p className="ml-36 text-xs md:pl-40">Forgot password?</p>
