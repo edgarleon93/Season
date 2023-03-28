@@ -1,8 +1,5 @@
-import React from 'react';
-import { ChevronLeft } from 'react-feather';
-import Button from '~/components/Buttons/Button';
-import Input from '~/components/Inputs/Input';
-import NavBar from '~/components/Navbar';
+import React, { useState } from 'react';
+import { StepSwitch } from '~/components/Register/StepSwitch';
 
 function Register() {
   const [email, setEmail] = useState('');
