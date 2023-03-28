@@ -2,10 +2,10 @@ import React, { Dispatch, SetStateAction } from 'react';
 import { Mail, User, Key } from 'react-feather';
 
 type InputProps = {
-  variant: 'username' | 'email' | 'password' | 'comment';
+  variant: 'username' | 'email' | 'password';
   placeholder: string;
-
-  // onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 const Input: React.FC<InputProps> = ({ placeholder, variant }) => {

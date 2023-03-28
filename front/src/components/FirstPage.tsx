@@ -1,5 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import Button from './Buttons/Button';
+
+// interface Props {
+//   setStep: Dispatch<SetStateAction<number>>;
+// }
 
 function FirstPage() {
   return (
@@ -25,7 +29,7 @@ function FirstPage() {
             It's time to spice up <br /> your social life!
           </h2>
           <span className="mt-16 flex justify-center">
-            <Button variant="primary" onClick={console.log}>
+            <Button variant="primary">
               <h2 className="px-12 text-3xl">register now !</h2>
             </Button>
           </span>

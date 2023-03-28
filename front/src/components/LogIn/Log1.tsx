@@ -1,9 +1,34 @@
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import Button from '../Buttons/Button';
 import { ChevronLeft, Key } from 'react-feather';
 import Input from '../Inputs/Input';
+import axios from 'axios';
 
-export function LogIn() {
+interface Props {
+  setStep: Dispatch<SetStateAction<number>>;
+  password: string;
+  setPassword: Dispatch<SetStateAction<string>>;
+
+  username: string;
+  setUsername: Dispatch<SetStateAction<string>>;
+}
+
+export function Log1({ username, password, setUsername, setPassword, setStep }) {
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post('http://localhost:3001/api/login', {
+        username,
+        password,
+      });
+
+      if (response.data.token) {
+        localStorage.setItem('authToken', response.data.token);
+      }
+    } catch (error) {
+      console.error('Error during login:', error);
+    }
+  };
+
   return (
     <>
       <div className="fixed left-0 top-0 ml-4">
@@ -33,16 +58,28 @@ export function LogIn() {
               Enter your credentials to access your account
             </p>
             <div className="mt-12">
-              <Input variant="username" placeholder="Username" />
+              <Input
+                onChange={(e) => setUsername(e.target.value)}
+                value={username}
+                variant="username"
+                placeholder="Username"
+              />
               <div className="mt-5 flex-row">
-                <Input variant="password" placeholder="Password" />
+                <Input
+                  onChange={(e) => setPassword(e.target.value)}
+                  value={password}
+                  variant="password"
+                  placeholder="Password"
+                />
                 <Button variant="fifth">
                   <p className="ml-36 text-xs md:pl-40">Forgot password?</p>
                 </Button>
               </div>
             </div>
             <div className="flex justify-center">
-              <Button variant="tertiary">Continue</Button>
+              <Button variant="tertiary" onClick={handleLogin}>
+                Continue
+              </Button>
             </div>
           </div>
         </div>

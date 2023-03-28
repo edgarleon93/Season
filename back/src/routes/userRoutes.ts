@@ -30,9 +30,9 @@ router.get('/all', getAllUsers);
 router.get('/user/:id', getUserById);
 
 // PUT /api/:id
-router.put('/user/:id', updateUserById);
+router.put('/modify/:id', updateUserById);
 
 // DELETE /api/:id
-router.delete('/user/:id', deleteUserById);
+router.delete('/delete/:id', deleteUserById);
 
 export default router;

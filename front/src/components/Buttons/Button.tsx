@@ -6,7 +6,7 @@ interface ButtonProps {
   className?: string;
   disabled?: boolean;
   children: React.ReactNode;
-  onClick?: () => void;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   variant: 'primary' | 'secondary' | 'tertiary' | 'quaternary' | 'fifth';
 }
 
