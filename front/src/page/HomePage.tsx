@@ -20,7 +20,7 @@ function HomePage() {
       <div>
         <TweetBox />
       </div>
-      <Publication />
+      {/* <Publication /> */}
     </>
   );
 }
