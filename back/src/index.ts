@@ -8,14 +8,14 @@ import userRoutes from './routes/userRoutes';
 
 if (process.env.NODE_ENV !== 'production') {
   dotenv.config({
-    path: path.join(__dirname, `../.env.${process.env.NODE_ENV}`),
-    // debug: true,
+    path: path.join(__dirname, `../.env.${process.env.NODE_ENV}`), // .env.development || .env.test
+    debug: true,
     override: true
   })
 } else {
   dotenv.config({
     path: path.join(__dirname, `../.env`),
-    // debug: true
+    override: true
   })
 }
 

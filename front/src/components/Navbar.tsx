@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-dom';
 
 import userImg from '../../public/img/avatar1.webp';
 
@@ -9,11 +10,11 @@ type DropdownItem = {
 };
 
 type NavbarProps = {
-  dropdownItems: DropdownItem[];
+  dropdownItems?: DropdownItem[];
 };
 
 export function Navbar({ dropdownItems }: NavbarProps) {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -39,13 +40,21 @@ export function Navbar({ dropdownItems }: NavbarProps) {
             {isDropdownOpen && (
               <div className="absolute z-10 mt-2 rounded bg-white shadow-lg">
                 {dropdownItems.map((item) => (
-                  <a
+                  // <a
+                  //   key={item.link}
+                  //   href={item.link}
+                  //   className="block px-4 py-2 text-gray-800 hover:bg-gray-500 hover:text-white"
+                  // >
+                  //   {item.label}
+                  // </a>
+                  // [NOTE]: Maybe used the Link component from react-dom
+                  <Link
                     key={item.link}
                     href={item.link}
                     className="block px-4 py-2 text-gray-800 hover:bg-gray-500 hover:text-white"
                   >
                     {item.label}
-                  </a>
+                  </Link>
                 ))}
               </div>
             )}
