@@ -18,6 +18,7 @@ function TweetBox() {
             placeholder="What's up?"
           />
         </form>
+        <div></div>
       </div>
       <Button variant="tertiary">Post</Button>
     </div>
