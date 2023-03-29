@@ -21,6 +21,8 @@ import ForgotPassword from './page/ForgotPassword';
 
 import HomePage from './page/HomePage';
 
+console.log('import.meta.env.VITE_SOME_KEY', import.meta.env.VITE_SOME_KEY);
+
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <BrowserRouter>
