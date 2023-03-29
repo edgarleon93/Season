@@ -19,10 +19,14 @@ import { Log } from './components/LogIn/Log';
 import Register from './page/register';
 import ForgotPassword from './page/ForgotPassword';
 
+import HomePage from './page/HomePage';
+
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
+        <Route path="/homePage" element={<HomePage />} />
+
         <Route path="/AvatarPicModif" element={<AvatarPicModif />} />
         <Route path="/Sidebar" element={<Sidebar />} />
         <Route path="/Navbar" element={<Navbar />} />

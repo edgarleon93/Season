@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 
 import userImg from '../../public/img/avatar1.webp';
 
- 
-
 type DropdownItem = {
 
   label: string;
@@ -103,4 +101,3 @@ export function Navbar({ dropdownItems }: NavbarProps) {
   );
 
 }
-
