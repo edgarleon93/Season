@@ -2,17 +2,20 @@ import { useState } from 'react';
 
 function TweetBox() {
   const [isActive, setIsActive] = useState(false);
+  const [text, setText] = useState('');
 
   const handleInputClick = () => {
     setIsActive(true);
   };
 
-  const handleInputBlur = () => {
-    setIsActive(false);
+  const handleTextChange = (event) => {
+    setText(event.target.value);
   };
 
   const handleButtonClick = () => {
-    console.log('Button clicked');
+    if (text !== '') {
+      console.log(text);
+    }
   };
 
   return (
@@ -20,12 +23,12 @@ function TweetBox() {
       <div className="relative flex w-11/12 flex-col">
         <textarea
           className={`bg-backtext resize-none rounded-3xl px-5 py-3 text-white outline-0 ${
-            isActive ? 'pb-40' : 'h-12'
+            isActive ? 'pb-10' : 'h-12'
           }`}
           type="textarea"
           placeholder="What's up?"
           onFocus={handleInputClick}
-          onBlur={handleInputBlur}
+          onChange={handleTextChange}
         />
         {isActive && (
           <button
