@@ -1,26 +1,44 @@
-import react from 'react';
-import Button from './Buttons/Button';
-// import { Image } from 'react-feather';
+import { useState } from 'react';
 
 function TweetBox() {
+  const [isActive, setIsActive] = useState(false);
+  const [text, setText] = useState('');
+
+  const handleInputClick = () => {
+    setIsActive(true);
+  };
+
+  const handleTextChange = (event) => {
+    setText(event.target.value);
+  };
+
+  const handleButtonClick = () => {
+    if (text !== '') {
+      console.log(text);
+    }
+  };
+
   return (
-    <div className="flex">
-      <div className="mt-4">
-        <img
-          className="mt-4 h-10 w-10 items-center rounded-full object-cover"
-          src="img/avatar1.webp"
-          alt=""
+    <div className="mt-4 flex justify-center">
+      <div className="relative flex w-11/12 flex-col">
+        <textarea
+          className={`bg-backtext resize-none rounded-3xl px-5 py-3 text-white outline-0 ${
+            isActive ? 'pb-10' : 'h-12'
+          }`}
+          type="textarea"
+          placeholder="What's up?"
+          onFocus={handleInputClick}
+          onChange={handleTextChange}
         />
-        <form>
-          <input
-            className="bg-backtext w-full rounded-3xl px-3 py-3.5 text-white outline-0"
-            type="textarea"
-            placeholder="What's up?"
-          />
-        </form>
-        <div></div>
+        {isActive && (
+          <button
+            onClick={handleButtonClick}
+            className=" absolute bottom-0 right-0 mb-2 mr-2 rounded bg-blue-500 py-2 px-4 text-white"
+          >
+            Send
+          </button>
+        )}
       </div>
-      <Button variant="tertiary">Post</Button>
     </div>
   );
 }
