@@ -25,7 +25,7 @@ function TweetBox() {
           className={`bg-backtext resize-none rounded-3xl px-5 py-3 text-white outline-0 ${
             isActive ? 'pb-10' : 'h-12'
           }`}
-          type="textarea"
+          // type="textarea"
           placeholder="What's up?"
           onFocus={handleInputClick}
           onChange={handleTextChange}
