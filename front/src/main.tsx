@@ -15,8 +15,9 @@ import TweetBox from './components/TweetBox';
 import Publication from './components/Publication';
 import AvatarPicModif from './components/Register/avatarPicModif';
 import Index from './page/Index';
-import { Log1 } from './components/LogIn/Log1';
+import { Log } from './components/LogIn/Log';
 import Register from './page/register';
+import ForgotPassword from './page/ForgotPassword';
 
 import HomePage from './page/HomePage';
 
@@ -37,7 +38,8 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         <Route path="/Heart" element={<IconBUtton type="heart"></IconBUtton>} />
 
         <Route path="/TweetBox" element={<TweetBox />} />
-        <Route path="/LogIn" element={<Log1 />} />
+        <Route path="/LogIn" element={<Log />} />
+        <Route path="/forgotpassword" element={<ForgotPassword />} />
 
         <Route path="/Index" element={<Index />} />
 

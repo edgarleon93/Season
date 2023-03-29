@@ -5,7 +5,7 @@ import { useFetch } from '~/hooks/useFetch';
 
 export function StepThree() {
   const [token, setToken] = useState<string | null>(null);
-  const { data, refetch } = useFetch('http://localhost:3001/LogIn/verify', {
+  const { data, refetch } = useFetch('http://localhost:3001/api/Register', {
     method: 'POST',
     body: JSON.stringify({
       token,
@@ -28,7 +28,7 @@ export function StepThree() {
   };
 
   const onRegister = () => {
-    window.location.href = '/LogIn';
+    window.location.href = '/Register';
   };
 
   return (
