@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import Button from '../Buttons/Button';
 import { Image } from '../Image/Image';
 import { ChevronLeft, Key } from 'react-feather';
@@ -16,7 +16,7 @@ interface Props {
   setUsername: Dispatch<SetStateAction<string>>;
 }
 
-export function Log({ username, password, setUsername, setPassword }) {
+export function LoginForm({ username, password, setUsername, setPassword }) {
   const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
@@ -53,6 +53,13 @@ export function Log({ username, password, setUsername, setPassword }) {
   const ForgotPassword = () => {
     window.location.href = '/ForgotPassword';
   };
+  const [user, setUser] = useState({
+    username: '',
+    password: '',
+  });
+  const handleChange = ({ currentTarget }) => {
+    console.log(currentTarget.value);
+  };
 
   return (
     <>
@@ -85,14 +92,14 @@ export function Log({ username, password, setUsername, setPassword }) {
             </p>
             <div className="mt-12">
               <Input
-                onChange={(e) => setUsername(e.target.value)}
+                onChange={handleChange}
                 value={username}
                 variant="username"
                 placeholder="Username"
               />
               <div className="mt-5 flex-row">
                 <Input
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={handleChange}
                   value={password}
                   variant="password"
                   placeholder="Password"

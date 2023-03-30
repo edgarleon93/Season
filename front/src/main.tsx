@@ -1,23 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { MessageSquare, User, UserPlus } from 'react-feather';
-import './style.css';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { Sidebar } from './components/Sidebar/Sidebar';
-import { Navbar } from './components/Navbar';
-import Button from './components/Buttons/Button';
-import InviteButton from './components/Buttons/InviteButton';
-import ButtonComponent from './components/Buttons/IconButton';
-import IconBUtton from './components/Buttons/IconButton';
-import Input from './components/Inputs/Input';
-import TweetBox from './components/TweetBox';
 
-import Publication from './components/Publication';
-import AvatarPicModif from './components/Register/avatarPicModif';
-import Index from './page/Index';
-import { Log } from './components/LogIn/Log';
-import Register from './page/register';
-import ForgotPassword from './page/ForgotPassword';
+import './style.css';
+import { BrowserRouter } from 'react-router-dom';
+
+import App from './App';
 
 import HomePage from './page/HomePage';
 
@@ -32,6 +19,9 @@ import HomePage from './page/HomePage';
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <BrowserRouter>
+<<<<<<< HEAD
+      <App />
+=======
       <Routes>
         <Route path="/LogIn" element={<Log />} />
         <Route path="/register" element={<Register />} />
@@ -56,6 +46,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 
         <Route path="/Publication" element={<Publication />} />
       </Routes>
+>>>>>>> 2c6c7d5b08124e7e3c7cbe8471cc6a05fdab2594
     </BrowserRouter>
   </React.StrictMode>,
 );

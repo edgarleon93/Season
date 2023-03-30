@@ -28,26 +28,6 @@ function StepOne({
   setEmail,
   setStep,
 }: Props) {
-  const handleRegister = async (event) => {
-    event.preventDefault();
-
-    try {
-      const response = await axios.post('http://localhost:3001/api/register', {
-        username,
-        email,
-        password,
-        confirmPassword,
-      });
-
-      if (response.data.token) {
-        localStorage.setItem('token', response.data.token);
-        // Redirigez l'utilisateur vers la page souhaitée après l'enregistrement réussi
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   const BackLogIn = () => {
     window.location.href = '/LogIn';
   };
@@ -80,6 +60,7 @@ function StepOne({
             <p className="text-md mx-9 mt-2 text-center text-white md:mt-4 md:text-xl">
               And start to add some seasoning to your social life!
             </p>
+
             <div className="mt-12">
               <Input
                 onChange={(e) => setEmail(e.target.value)}
@@ -87,6 +68,7 @@ function StepOne({
                 variant="username"
                 placeholder="Username"
               />
+
               <div className="mt-5 flex-row">
                 <Input
                   onChange={(e) => setUsername(e.target.value)}
@@ -114,7 +96,9 @@ function StepOne({
             </div>
             <div className=" flex justify-center">
               <Button
-                onClick={() => setStep(2)}
+                onClick={() => {
+                  setStep(2);
+                }}
                 disabled={!email || !password || !username || !confirmPassword}
                 variant="tertiary"
               >
