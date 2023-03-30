@@ -324,3 +324,29 @@ export const deleteUserById = async (req: Request, res: Response) => {
     res.status(500).json({ message: 'Something went wrong' });
   }
 };
+
+export const updateProfilePic = async (req: Request, res: Response) => {
+  try {
+    const userId = req.params.id;
+    const file = req.file;
+
+    if (!file) {
+      return res.status(400).json({ message: 'Veuillez sélectionner une photo de profil' });
+    }
+
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ message: 'Utilisateur non trouvé' });
+    }
+
+    // Met à jour la photo de profil de l'utilisateur en tant que chaîne base64
+    user.profilePic = `data:${file.mimetype};base64,${file.buffer.toString('base64')}`;
+    await user.save();
+
+    res.json({ message: 'Photo de profil mise à jour avec succès' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Erreur serveur' });
+  }
+};
