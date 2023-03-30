@@ -38,7 +38,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         <Route path="/forgotpassword" element={<ForgotPassword />} />
 
         {/* [NOTE]: Use the token from Login to protect all other routes on the frontend.  */}
-        <Route path="/homePage" token="h<jhllqlgd" element={<HomePage />} />
+        <Route path="/homePage" element={<HomePage />} />
 
         <Route path="/AvatarPicModif" element={<AvatarPicModif />} />
         <Route path="/Sidebar" element={<Sidebar />} />
