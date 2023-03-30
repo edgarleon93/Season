@@ -1,6 +1,5 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Button from './Buttons/Button';
-import Register from '~/page/register';
 
 function FirstPage() {
   const [href, setHref] = useState('/Index');
@@ -33,6 +32,7 @@ function FirstPage() {
           <h2 className="mt-8 text-center text-3xl text-white md:text-5xl	">
             It's time to spice up <br /> your social life!
           </h2>
+
           <span className="mt-5 flex justify-center">
             <Button variant="primary">
               <h2 className="px-12 text-3xl" onClick={BackRegister}>
@@ -49,6 +49,7 @@ function FirstPage() {
               Log In
             </a>
           </p>
+
           <div className="fixed bottom-0 left-0 pb-2 text-white">
             <button className="px-2 text-[0.8rem]">Cookie policy</button>
           </div>

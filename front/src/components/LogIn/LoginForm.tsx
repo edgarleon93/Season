@@ -14,22 +14,7 @@ interface Props {
   setUsername: Dispatch<SetStateAction<string>>;
 }
 
-export function Log({ username, password, setUsername, setPassword }) {
-  const handleLogin = async () => {
-    try {
-      const response = await axios.post('http://localhost:3001/api/login', {
-        username,
-        password,
-      });
-
-      if (response.data.token) {
-        localStorage.setItem('authToken', response.data.token);
-      }
-    } catch (error) {
-      console.error('Error during login:', error);
-    }
-  };
-
+export function LoginForm({ username, password, setUsername, setPassword }) {
   const onVerifyLogIn = () => {
     window.location.href = '/home';
   };
@@ -38,6 +23,13 @@ export function Log({ username, password, setUsername, setPassword }) {
   };
   const ForgotPassword = () => {
     window.location.href = '/ForgotPassword';
+  };
+  const [user, setUser] = useState({
+    username: '',
+    password: '',
+  });
+  const handleChange = ({ currentTarget }) => {
+    console.log(currentTarget.value);
   };
 
   return (
@@ -70,14 +62,14 @@ export function Log({ username, password, setUsername, setPassword }) {
             </p>
             <div className="mt-12">
               <Input
-                onChange={(e) => setUsername(e.target.value)}
+                onChange={handleChange}
                 value={username}
                 variant="username"
                 placeholder="Username"
               />
               <div className="mt-5 flex-row">
                 <Input
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={handleChange}
                   value={password}
                   variant="password"
                   placeholder="Password"

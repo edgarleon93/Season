@@ -1,13 +1,50 @@
 import React, { useState } from 'react';
-import userImg from '../../public/img/avatar1.webp';
+import { Link } from 'react-router-dom';
+import { Image } from './img/Image';
 
-export function Navbar() {
+type DropdownItem = {
+  label: string;
+  link: string;
+};
 
-return (
+type NavbarProps = {
+  dropdownItems?: DropdownItem[];
+};
 
-<nav className="bg-bg border-b-2 border-solid border-white px-2 py-5 "> 
-  <div className="container mx-auto flex items-center justify-center"> 
-    <img src={userImg} className="absolute left-10 mr-3 h-9" alt="Flowbite Logo" /> 
-    <a href="/home"> <h1 className="text-red">Season</h1> </a> 
-  </div> 
-</nav> ); }
+export function Navbar({ dropdownItems }: NavbarProps): JSX.Element {
+  const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  return (
+    <nav className="bg-bg px-2 py-5">
+      <div className="container mx-auto flex items-center justify-center">
+        <div>
+          <div
+            className="relative cursor-pointer"
+            onClick={toggleDropdown}
+            onBlur={() => setIsDropdownOpen(false)}
+          >
+            <img src={''} className="absolute left-10 mr-3 h-9" alt="" />
+            <h1 className="text-red text-3xl">Season</h1>
+            {isDropdownOpen && (
+              <div className="absolute z-10 mt-2 rounded bg-white shadow-lg">
+                {dropdownItems?.map((item) => (
+                  <Link
+                    key={item.link}
+                    to={item.link}
+                    className="block px-4 py-2 text-gray-800 hover:bg-gray-500 hover:text-white"
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </nav>
+  );
+}
