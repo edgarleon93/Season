@@ -139,7 +139,7 @@ export const forgotPassword = async (req: Request, res: Response) => {
 
     // Construction des URL de réinitialisation de mot de passe pour les environnements de production et de développement
     const resetUrl = `http://${process.env.NAME_DOMAIN}/api/reset-password/${user._id}/${token}`;
-    const resetUrl2 = `http://localhost:3001/api/reset-password/${user._id}/${token}`;
+    const resetUrl2 = `${process.env.LOCAL_URL}/api/reset-password/${user._id}/${token}`;
     console.log(resetUrl);
     console.log(resetUrl2); 
     
