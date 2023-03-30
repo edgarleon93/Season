@@ -13,31 +13,31 @@ import upload from '../config/multerConfig';
 
 const router: Router = express.Router();
 
-// POST /api/register
+// POST /register
 router.post('/register', register);
 
-// POST /api/login
+// POST /login
 router.post('/login', login);
 
-// POST /api/forgot-password
+// POST /forgot-password
 router.post('/forgot-password', forgotPassword);
 
-//POST /api/reset-password
+//POST /reset-password
 router.post('/reset-password/:id/:resetPasswordToken', resetPassword);
 
-// GET /api/all
+// GET /all
 router.get('/all', getAllUsers);
 
-// GET /api/user/:id
+// GET /user/:id
 router.get('/user/:id', getUserById);
 
-// PUT /api/:id
+// PUT /:id
 router.put('/modify/:id', updateUserById);
 
-// PUT /api/profile-pic/:id
+// PUT /profile-pic/:id
 router.put('/profile-pic/:id', upload.single('profilePic'), updateProfilePic);
 
-// DELETE /api/:id
+// DELETE /:id
 router.delete('/delete/:id', deleteUserById);
 
 export default router;
