@@ -3,8 +3,10 @@ import path from 'path';
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
+import session from 'express-session';
 
 import userRoutes from './routes/userRoutes';
+import postRoutes from './routes/postRoutes';
 
 if (process.env.NODE_ENV !== 'production') {
   dotenv.config({
@@ -19,7 +21,6 @@ if (process.env.NODE_ENV !== 'production') {
   })
 }
 
-
 console.log('DB_URL', process.env.DB_URL);
 console.log('ENVIRONMENT', process.env.ENVIRONMENT);
 console.log('FRONTEND_URL', process.env.FRONTEND_URL);
@@ -31,6 +32,16 @@ app.use(express.json());
 app.use(cors());
 
 app.use('/', userRoutes);
+app.use('/', postRoutes);
+
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET || '1G2G3G4G5G6G7G8G9G10G',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false, maxAge: 24 * 60 * 60 * 1000 },
+  }),
+);
 
 const PORT: number = Number(process.env.PORT);
 

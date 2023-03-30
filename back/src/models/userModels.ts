@@ -1,4 +1,4 @@
-import mongoose, { Document } from "mongoose";
+import mongoose, { Document, Schema } from "mongoose";
 
 interface User {
   username: string;
@@ -55,7 +55,7 @@ const userSchema = new mongoose.Schema({
     default: [],
   },
   posts: {
-    type: Array,
+    type: [Schema.Types.ObjectId],
     default: [],
   },
   comments: {
