@@ -1,45 +1,19 @@
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction, useContext, useState } from 'react';
 import Button from '../Buttons/Button';
 import { Image } from '../Image/Image';
 import { ChevronLeft, Key } from 'react-feather';
 import Input from '../Inputs/Input';
 import axios from 'axios';
-import { useFetch } from '~/hooks/useFetch';
+
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '~/contexts/Auth';
 
-interface Props {
-  setStep: Dispatch<SetStateAction<number>>;
-  password: string;
-  setPassword: Dispatch<SetStateAction<string>>;
-
-  username: string;
-  setUsername: Dispatch<SetStateAction<string>>;
-}
-
-export function LoginForm({ username, password, setUsername, setPassword }) {
+export function LoginForm() {
   const [isLoading, setIsLoading] = useState(false);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
   const navigate = useNavigate();
-
-  const handleLogin = async () => {
-    setIsLoading(true);
-
-    try {
-      // const response = await axios.post('http://localhost:3001/api/login', {
-      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/login`, {
-        username,
-        password,
-      });
-
-      if (response.data.token) {
-        localStorage.setItem('authToken', response.data.token);
-      }
-      setIsLoading(false);
-    } catch (error) {
-      console.error('Error during login:', error);
-      // [FIXME]: Add a toast to display the error
-    }
-  };
 
   // [FIXME]: In react use useLocation hook to travel between routes
   const onVerifyLogIn = () => {
@@ -53,14 +27,8 @@ export function LoginForm({ username, password, setUsername, setPassword }) {
   const ForgotPassword = () => {
     window.location.href = '/ForgotPassword';
   };
-  const [user, setUser] = useState({
-    username: '',
-    password: '',
-  });
-  const handleChange = ({ currentTarget }) => {
-    console.log(currentTarget.value);
-  };
 
+  const { isAuthenticated } = useContext(AuthContext);
   return (
     <>
       {isLoading && <div>Loading...</div>}
@@ -90,16 +58,17 @@ export function LoginForm({ username, password, setUsername, setPassword }) {
             <p className="text-md mx-7 mt-2 text-center text-white md:mt-4 md:text-xl">
               Enter your credentials to access your account
             </p>
-            <div className="mt-12">
+
+            <form className="mt-12">
               <Input
-                onChange={handleChange}
+                onChange={(e) => setUsername(e.target.value)}
                 value={username}
                 variant="username"
                 placeholder="Username"
               />
               <div className="mt-5 flex-row">
                 <Input
-                  onChange={handleChange}
+                  onChange={(e) => setPassword(e.target.value)}
                   value={password}
                   variant="password"
                   placeholder="Password"
@@ -108,7 +77,7 @@ export function LoginForm({ username, password, setUsername, setPassword }) {
                   <p className="ml-36 text-xs md:pl-40">Forgot password?</p>
                 </Button>
               </div>
-            </div>
+            </form>
             <div className="flex justify-center">
               <Button variant="tertiary" onClick={onVerifyLogIn}>
                 Continue
@@ -120,3 +89,23 @@ export function LoginForm({ username, password, setUsername, setPassword }) {
     </>
   );
 }
+
+// const handleLogin = async () => {
+//   setIsLoading(true);
+
+//   try {
+//     const response = await axios.post('http://localhost:3001/api/login', {
+//     const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/login`, {
+//       username,
+//       password,
+//     });
+
+//     if (response.data.token) {
+//       localStorage.setItem('authToken', response.data.token);
+//     }
+//     setIsLoading(false);
+//   } catch (error) {
+//     console.error('Error during login:', error);
+//     [FIXME]: Add a toast to display the error
+//   }
+// };

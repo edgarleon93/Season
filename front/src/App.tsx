@@ -4,16 +4,24 @@ import LogIn from './page/LogIn';
 import Index from './page/Index';
 import { useState } from 'react';
 import { hasAuthenticated } from './services/AuthAPI';
-import Auth from './contexts/Auth';
+import { AuthContext } from './contexts/Auth';
 import EditProfile from './components/userProfile/EditProfile';
 import RequireAuth from './components/RequireAuth';
 
+// [NOTE]: Secrets in the vite and react app
+// console.log('import.meta.env.VITE_FRONTEND_URL', import.meta.env.VITE_FRONTEND_URL);
+// console.log('import.meta.env.VITE_BACKEND_URL', import.meta.env.VITE_BACKEND_URL);
+// console.log(
+//   'import.meta.env.SUPER_SECRET_NOT_PREFIXED',
+//   import.meta.env.SUPER_SECRET_NOT_PREFIXED,
+// );
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(hasAuthenticated());
+  const [isAuthenticated] = useState(hasAuthenticated());
   return (
-    <Auth.Provider value={{ isAuthenticated, setIsAuthenticated }}>
+    <AuthContext.Provider value={{ isAuthenticated }}>
       <div className="flex-1">
         <Routes>
+          {/* [NOTE]: Use the token from Login to protect all other routes on the frontend.  */}
           <Route path="/" element={<Index />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<LogIn />} />
@@ -27,7 +35,7 @@ function App() {
           />
         </Routes>
       </div>
-    </Auth.Provider>
+    </AuthContext.Provider>
   );
 }
 

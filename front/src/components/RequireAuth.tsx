@@ -1,9 +1,9 @@
 import { useContext } from 'react';
 import { Navigate } from 'react-router-dom';
-import Auth from '~/contexts/Auth';
+import { AuthContext } from '~/contexts/Auth';
 
 const RequireAuth = ({ children }) => {
-  const { isAuthenticated } = useContext(Auth);
+  const { isAuthenticated } = useContext(AuthContext);
 
   if (isAuthenticated) {
     return children;
