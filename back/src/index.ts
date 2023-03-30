@@ -1,22 +1,31 @@
 import dotenv from 'dotenv';
-dotenv.config();
+import path from 'path';
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 
 import userRoutes from './routes/userRoutes';
 
+if (process.env.NODE_ENV !== 'production') {
+  dotenv.config({
+    path: path.join(__dirname, `../.env.${process.env.NODE_ENV}`), // .env.development || .env.test
+    debug: true,
+    override: true
+  })
+} else {
+  dotenv.config({
+    path: path.join(__dirname, `../.env`),
+    override: true
+  })
+}
+
+
+console.log('DB_URL', process.env.DB_URL);
+console.log('ENVIRONMENT', process.env.ENVIRONMENT);
+console.log('FRONTEND_URL', process.env.FRONTEND_URL);
+console.log('BACKEND_URL', process.env.BACKEND_URL);
+
 const app = express();
-
-// install cross env pour pkg.json
-
-// if (process.env.NODE_ENV === 'development') {
-//   config({ path: `./.env.${process.env.NODE_ENV}` });
-// }
-
-// "start:build": "node NODE_ENV=production ./dist/index.js",
-    // "dev": "nodemon  NODE_ENV=development ./src/index.ts",
-    // "prod": "nodemon ./src/index.ts"
 
 app.use(express.json());
 app.use(cors());

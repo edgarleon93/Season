@@ -7,7 +7,7 @@ interface ButtonComponentProps {
 }
 
 const IconButton: React.FC<ButtonComponentProps> = ({ type, onClick }) => {
-  const [isHeartRed, setIsHeartRed] = useState(false);
+  const [isHeartRed, setIsHeartRed] = useState<boolean>(false);
 
   const handleHeartClick = () => {
     setIsHeartRed(!isHeartRed);

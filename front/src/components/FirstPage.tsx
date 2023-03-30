@@ -7,6 +7,8 @@ function FirstPage() {
   function handleClick() {
     setHref('/Register');
   }
+
+  // [FIXME]: Here you have to use useLocation() hook from react-router-dom to navigate not the window.location.href
   const BackRegister = () => {
     window.location.href = '/Register';
   };

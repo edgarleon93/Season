@@ -21,10 +21,23 @@ import ForgotPassword from './page/ForgotPassword';
 
 import HomePage from './page/HomePage';
 
+// [NOTE]: Secrets in the vite and react app
+// console.log('import.meta.env.VITE_FRONTEND_URL', import.meta.env.VITE_FRONTEND_URL);
+// console.log('import.meta.env.VITE_BACKEND_URL', import.meta.env.VITE_BACKEND_URL);
+// console.log(
+//   'import.meta.env.SUPER_SECRET_NOT_PREFIXED',
+//   import.meta.env.SUPER_SECRET_NOT_PREFIXED,
+// );
+
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
+        <Route path="/LogIn" element={<Log />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/forgotpassword" element={<ForgotPassword />} />
+
+        {/* [NOTE]: Use the token from Login to protect all other routes on the frontend.  */}
         <Route path="/homePage" element={<HomePage />} />
 
         <Route path="/AvatarPicModif" element={<AvatarPicModif />} />
@@ -38,13 +51,10 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         <Route path="/Heart" element={<IconBUtton type="heart"></IconBUtton>} />
 
         <Route path="/TweetBox" element={<TweetBox />} />
-        <Route path="/LogIn" element={<Log />} />
-        <Route path="/forgotpassword" element={<ForgotPassword />} />
 
-        <Route path="/Index" element={<Index />} />
+        <Route path="/" element={<Index />} />
 
         <Route path="/Publication" element={<Publication />} />
-        <Route path="/register" element={<Register />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,
