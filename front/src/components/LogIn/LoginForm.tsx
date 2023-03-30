@@ -1,9 +1,11 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import Button from '../Buttons/Button';
+import { Image } from '../Image/Image';
 import { ChevronLeft, Key } from 'react-feather';
 import Input from '../Inputs/Input';
 import axios from 'axios';
 import { useFetch } from '~/hooks/useFetch';
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
   setStep: Dispatch<SetStateAction<number>>;
@@ -15,12 +17,39 @@ interface Props {
 }
 
 export function LoginForm({ username, password, setUsername, setPassword }) {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const navigate = useNavigate();
+
+  const handleLogin = async () => {
+    setIsLoading(true);
+
+    try {
+      // const response = await axios.post('http://localhost:3001/api/login', {
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/login`, {
+        username,
+        password,
+      });
+
+      if (response.data.token) {
+        localStorage.setItem('authToken', response.data.token);
+      }
+      setIsLoading(false);
+    } catch (error) {
+      console.error('Error during login:', error);
+      // [FIXME]: Add a toast to display the error
+    }
+  };
+
+  // [FIXME]: In react use useLocation hook to travel between routes
   const onVerifyLogIn = () => {
-    window.location.href = '/home';
+    navigate('/home');
   };
   const BackRegister = () => {
-    window.location.href = '/Register';
+    console.log('BackRegister I was clicked');
+    navigate('/Register');
   };
+
   const ForgotPassword = () => {
     window.location.href = '/ForgotPassword';
   };
@@ -34,6 +63,7 @@ export function LoginForm({ username, password, setUsername, setPassword }) {
 
   return (
     <>
+      {isLoading && <div>Loading...</div>}
       <div className="fixed left-0 top-0 ml-4">
         <Button variant="secondary" onClick={BackRegister}>
           <div className="flex pr-2.5">
@@ -48,7 +78,7 @@ export function LoginForm({ username, password, setUsername, setPassword }) {
       </div>
       <div className="align-center grid place-content-center gap-4 text-center sm:mr-10 sm:grid-cols-2">
         <div className="text-center">
-          <img
+          <Image
             className="hidden h-screen w-[40vw] sm:block"
             src="./img/BgDesk.png"
             alt=""
