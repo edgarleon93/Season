@@ -5,7 +5,9 @@ interface Post {
   userId: string;
   text: string;
   img: string;
+  video: string;
   likes: string[];
+  comments: string[];
   date: Date;
 }
 
@@ -23,7 +25,14 @@ const postSchema = new mongoose.Schema({
   img: {
     type: String,
   },
+  video: {
+    type: String,
+  },
   likes: {
+    type: Array,
+    default: [],
+  },
+  comments: {
     type: Array,
     default: [],
   },

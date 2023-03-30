@@ -101,6 +101,28 @@ export const login = async (req: Request, res: Response) => {
   }
 };
 
+// Déconnexion d'un utilisateur
+export const logout = async (req: Request, res: Response) => {
+  try {
+    // Récupération de l'utilisateur à partir de la requête
+    const user = req.user;
+
+    console.log('User:', user); // Ajoutez ce journal de débogage
+
+    // Vérifie si l'utilisateur est connecté
+    if (!user) {
+      return res.status(400).json({ message: 'User not logged in' });
+    }
+
+    // Envoi de la réponse avec un message de succès
+    res.status(200).json({ message: 'User Logged Out' });
+  } catch (error) {
+    console.error('Error:', error); // Ajoutez ce journal de débogage
+    // Gestion des erreurs
+    res.status(500).json({ message: 'Something went wrong' });
+  }
+};
+
 // Importation de la bibliothèque Mailgun et création d'un client avec les informations d'authentification
 const mailgun = new Mailgun(formData);
 const client = mailgun.client({
@@ -138,8 +160,8 @@ export const forgotPassword = async (req: Request, res: Response) => {
     await user.save();
 
     // Construction des URL de réinitialisation de mot de passe pour les environnements de production et de développement
-    const resetUrl = `http://${process.env.NAME_DOMAIN}/api/reset-password/${user._id}/${token}`;
-    const resetUrl2 = `${process.env.LOCAL_URL}/api/reset-password/${user._id}/${token}`;
+    const resetUrl = `http://${process.env.NAME_DOMAIN}/reset-password/${user._id}/${token}`;
+    const resetUrl2 = `${process.env.LOCAL_URL}/reset-password/${user._id}/${token}`;
     console.log(resetUrl);
     console.log(resetUrl2); 
     
