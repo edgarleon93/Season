@@ -1,24 +1,46 @@
-import { Dispatch, SetStateAction, useContext, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from '../Buttons/Button';
 import { Image } from '../Image/Image';
 import { ChevronLeft, Key } from 'react-feather';
 import Input from '../Inputs/Input';
-import axios from 'axios';
-
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '~/contexts/Auth';
+import axios from 'axios';
+import { API_URL, useAuth } from '~/contexts/Auth';
 
 export function LoginForm() {
-  const [isLoading, setIsLoading] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const { authState, onLogin } = useAuth();
+
+  const login = async () => {
+    if (authState.authenticated) {
+      console.log('You are already logged in');
+    } else {
+      const result = await onLogin(username, password);
+      if (result && result.error) {
+        console.log(result.msg);
+      }
+    }
+  };
+
+  useEffect(() => {
+    const testCall = async () => {
+      try {
+        const result = await axios.post(`${API_URL}/login`);
+        console.log('testCall result:', result);
+      } catch (error) {
+        console.error('testCall error:', error);
+      }
+    };
+    testCall();
+  }, []);
 
   const navigate = useNavigate();
 
   // [FIXME]: In react use useLocation hook to travel between routes
-  const onVerifyLogIn = () => {
-    navigate('/home');
-  };
+  // const onVerifyLogIn = () => {
+  //   navigate('/home');
+  // };
   const BackRegister = () => {
     console.log('BackRegister I was clicked');
     navigate('/Register');
@@ -28,10 +50,8 @@ export function LoginForm() {
     window.location.href = '/ForgotPassword';
   };
 
-  const { isAuthenticated } = useContext(AuthContext);
   return (
     <>
-      {isLoading && <div>Loading...</div>}
       <div className="fixed left-0 top-0 ml-4">
         <Button variant="secondary" onClick={BackRegister}>
           <div className="flex pr-2.5">
@@ -79,7 +99,7 @@ export function LoginForm() {
               </div>
             </form>
             <div className="flex justify-center">
-              <Button variant="tertiary" onClick={onVerifyLogIn}>
+              <Button variant="tertiary" onClick={login}>
                 Continue
               </Button>
             </div>
