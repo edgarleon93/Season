@@ -2,7 +2,6 @@ import { Dispatch, SetStateAction, useEffect } from 'react';
 import StepOne from './StepOne';
 import StepTwo from './StepTwo';
 import StepThree from './StepThree';
-import FirstPage from '../FirstPage';
 
 interface Props {
   email: string;

@@ -1,12 +1,14 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Router } from 'react-router-dom';
 import Register from './page/register';
 import LogIn from './page/LogIn';
 import Index from './page/Index';
-import { useState } from 'react';
-import { hasAuthenticated } from './services/AuthAPI';
-import { AuthContext } from './contexts/Auth';
+import { Navbar } from './components/Navbar';
+import HomePage from './page/HomePage';
+
 import EditProfile from './components/userProfile/EditProfile';
-import RequireAuth from './components/RequireAuth';
+import { Home } from 'react-feather';
+
+import { AuthProvider, useAuth } from './contexts/Auth';
 
 // [NOTE]: Secrets in the vite and react app
 // console.log('import.meta.env.VITE_FRONTEND_URL', import.meta.env.VITE_FRONTEND_URL);
@@ -15,28 +17,17 @@ import RequireAuth from './components/RequireAuth';
 //   'import.meta.env.SUPER_SECRET_NOT_PREFIXED',
 //   import.meta.env.SUPER_SECRET_NOT_PREFIXED,
 // );
-function App() {
-  const [isAuthenticated] = useState(hasAuthenticated());
+export default function App() {
+  const { authState, onLogout } = useAuth();
   return (
-    <AuthContext.Provider value={{ isAuthenticated }}>
-      <div className="flex-1">
-        <Routes>
-          {/* [NOTE]: Use the token from Login to protect all other routes on the frontend.  */}
-          <Route path="/" element={<Index />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<LogIn />} />
-          <Route
-            path="/profile"
-            element={
-              <RequireAuth>
-                <EditProfile />
-              </RequireAuth>
-            }
-          />
-        </Routes>
-      </div>
-    </AuthContext.Provider>
+    <Routes>
+      {/* [NOTE]: Use the token from Login to protect all other routes on the frontend.  */}
+      {authState?.authenticated ? (
+        <Route path="/" element={<Index />} />
+      ) : (
+        <Route path="/login" element={<LogIn />} />
+      )}
+      <Route path="/register" element={<Register />} />
+    </Routes>
   );
 }
-
-export default App;
