@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Image } from './img/Image';
 
 type DropdownItem = {
   label: string;

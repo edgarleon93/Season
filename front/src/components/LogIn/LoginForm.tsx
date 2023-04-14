@@ -8,32 +8,28 @@ import axios from 'axios';
 import { API_URL, useAuth } from '~/contexts/Auth';
 
 export function LoginForm() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const { authState, onLogin } = useAuth();
+  const [values, setValues] = useState({
+    username: '',
+    password: '',
+  });
 
-  const login = async () => {
-    if (authState.authenticated) {
-      console.log('You are already logged in');
-    } else {
-      const result = await onLogin(username, password);
-      if (result && result.error) {
-        console.log(result.msg);
-      }
-    }
+  const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setValues((prev) => {
+      const updatedValues = { ...prev, [name]: value };
+      return updatedValues;
+    });
   };
-
-  useEffect(() => {
-    const testCall = async () => {
-      try {
-        const result = await axios.post(`${API_URL}/login`);
-        console.log('testCall result:', result);
-      } catch (error) {
-        console.error('testCall error:', error);
-      }
-    };
-    testCall();
-  }, []);
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    axios
+      .post('https://season-app-hbxam.ondigitalocean.app/login', values)
+      .then((res) => {
+        console.log(res);
+        navigate('/Home');
+      })
+      .catch((err) => console.log(err));
+  };
 
   const navigate = useNavigate();
 
@@ -79,19 +75,23 @@ export function LoginForm() {
               Enter your credentials to access your account
             </p>
 
-            <form className="mt-12">
+            <form onSubmit={handleSubmit} className="mt-12">
               <Input
-                onChange={(e) => setUsername(e.target.value)}
-                value={username}
+                value={values.username}
+                name="username"
                 variant="username"
                 placeholder="Username"
+                onChange={handleInput}
+                required
               />
               <div className="mt-5 flex-row">
                 <Input
-                  onChange={(e) => setPassword(e.target.value)}
-                  value={password}
+                  value={values.password}
+                  name="password"
                   variant="password"
                   placeholder="Password"
+                  onChange={handleInput}
+                  required
                 />
                 <Button variant="fifth" onClick={ForgotPassword}>
                   <p className="ml-36 text-xs md:pl-40">Forgot password?</p>
@@ -99,7 +99,7 @@ export function LoginForm() {
               </div>
             </form>
             <div className="flex justify-center">
-              <Button variant="tertiary" onClick={login}>
+              <Button variant="tertiary" onClick={handleSubmit}>
                 Continue
               </Button>
             </div>
