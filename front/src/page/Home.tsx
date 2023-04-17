@@ -4,11 +4,11 @@ import Publication from '~/components/Publication';
 import Sidebar from '~/components/Sidebar';
 import TweetBox from '~/components/TweetBox';
 
-function HomePage() {
+export function Home() {
   return (
     <>
       <Navbar />
-      <Sidebar />
+      <Sidebar title="FEED" />
       <div>
         <TweetBox />
       </div>
@@ -16,5 +16,3 @@ function HomePage() {
     </>
   );
 }
-
-export default HomePage;
