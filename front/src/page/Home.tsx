@@ -1,18 +1,23 @@
 import axios from 'axios';
+import FeedAndTrend from '~/components/FeedAndTrend';
 import { Navbar } from '~/components/Navbar';
 import Publication from '~/components/Publication';
 import Sidebar from '~/components/Sidebar';
 import TweetBox from '~/components/TweetBox';
+import { PostsProvider } from '~/contexts/PostContext';
 
 export function Home() {
   return (
     <>
       <Navbar />
-      <Sidebar title="FEED" />
+      <FeedAndTrend />
       <div>
         <TweetBox />
       </div>
       {/* <Publication /> */}
+      <PostsProvider>
+        <Publication />
+      </PostsProvider>
     </>
   );
 }

@@ -69,7 +69,7 @@ function Publication() {
           />
           <div className="flex-1">
             <div className="mb-2 flex items-center">
-              <p className="mr-2 text-xl font-extrabold text-white">
+              <p className="mb-4 mt-2 mr-2 text-xl font-extrabold text-white">
                 {post.userData.username || 'John Doe'}
               </p>
             </div>
@@ -88,9 +88,6 @@ function Publication() {
                   <span className="ml-1">{post.comments.length}</span>
                 </button>
               </div>
-              {/* <div className="flex justify-center">
-                <span className="mt-4 block w-11/12 border-t border-white"></span>
-              </div> */}
             </div>
           </div>
         </div>
