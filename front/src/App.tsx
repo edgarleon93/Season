@@ -24,10 +24,12 @@ export default function App() {
     <Routes>
       {/* [NOTE]: Use the token from Login to protect all other routes on the frontend.  */}
       <Route path="/" element={<Index />} />
+
       <Route path="/login" element={<LogIn />} />
       <Route path="/register" element={<Register />} />
       <Route path="/Home" element={<Home />} />
       <Route path="/search" element={<SearchFollowers />} />
+
       <Route path="/navbar" element={<Navbar />} />
       <Route path="/Profile/:username" element={<Profile />} />
     </Routes>
