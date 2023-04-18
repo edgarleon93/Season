@@ -1,8 +1,8 @@
 import React from 'react';
-import { Mail, User, Key } from 'react-feather';
+import { Mail, User, Key, Search } from 'react-feather';
 
 type InputProps = {
-  variant: 'username' | 'email' | 'password';
+  variant: 'username' | 'email' | 'password' | 'search';
   placeholder: string;
   name: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -52,6 +52,15 @@ const Input: React.FC<InputProps> = ({
         <input {...commonInputProps} type="password" />
         <div className="absolute top-1/2 left-2 ml-14 -translate-y-1/2 transform sm:mx-8">
           <Key className=" stroke-1 text-white" />
+        </div>
+      </div>
+    );
+  } else if (variant === 'search') {
+    return (
+      <div className="relative">
+        <input {...commonInputProps} type="change" />
+        <div className="absolute top-1/2 left-2 -translate-y-1/2 transform sm:mx-8">
+          <Search className=" stroke-1 text-white" />
         </div>
       </div>
     );
