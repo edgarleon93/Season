@@ -10,6 +10,7 @@ import { Register } from './page/Register';
 import SearchFollowers from './page/SearchFollowers';
 import { SearchProvider } from './contexts/SearchContext';
 import Profile from './page/Profile';
+import { PostsProvider } from './contexts/PostContext';
 
 // [NOTE]: Secrets in the vite and react app
 // console.log('import.meta.env.VITE_FRONTEND_URL', import.meta.env.VITE_FRONTEND_URL);
@@ -29,7 +30,15 @@ export default function App() {
       <Route path="/Home" element={<Home />} />
       <Route path="/search" element={<SearchFollowers />} />
       <Route path="/navbar" element={<Navbar />} />
-      <Route path="/Profile/:username" element={<Profile />} />
+
+      <Route
+        path="/profile"
+        element={
+          <PostsProvider>
+            <Profile />
+          </PostsProvider>
+        }
+      />
     </Routes>
   );
 }

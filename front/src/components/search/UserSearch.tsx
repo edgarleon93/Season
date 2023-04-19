@@ -1,9 +1,6 @@
 import React from 'react';
 import { User } from './SearchBar';
-import Button from '../Buttons/Button';
-import InviteButton from '../Buttons/InviteButton';
-import { UserPlus } from 'react-feather';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
   query: string;
