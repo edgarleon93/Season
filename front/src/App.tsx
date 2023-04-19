@@ -6,11 +6,16 @@ import { Navbar } from './components/Navbar';
 import { Home } from './page/Home';
 import { AuthProvider, useAuth } from './contexts/Auth';
 
-import { Register } from './page/Register';
+import { Register } from './page/register';
 import SearchFollowers from './page/SearchFollowers';
 import { SearchProvider } from './contexts/SearchContext';
 import Profile from './page/Profile';
+
+import Publication from './components/Publication';
 import { PostsProvider } from './contexts/PostContext';
+import FeedAndTrend from './components/FeedAndTrend';
+import Feed from './page/Feed';
+
 
 // [NOTE]: Secrets in the vite and react app
 // console.log('import.meta.env.VITE_FRONTEND_URL', import.meta.env.VITE_FRONTEND_URL);
@@ -25,10 +30,22 @@ export default function App() {
     <Routes>
       {/* [NOTE]: Use the token from Login to protect all other routes on the frontend.  */}
       <Route path="/" element={<Index />} />
+
       <Route path="/login" element={<LogIn />} />
       <Route path="/register" element={<Register />} />
       <Route path="/Home" element={<Home />} />
       <Route path="/search" element={<SearchFollowers />} />
+      <Route
+        path="/Publication"
+        element={
+          <PostsProvider>
+            <Publication />
+          </PostsProvider>
+        }
+      />
+      <Route path="/FeedAndTrend" element={<FeedAndTrend />} />
+      <Route path="Feed" element={<Feed />} />
+
       <Route path="/navbar" element={<Navbar />} />
 
       <Route
