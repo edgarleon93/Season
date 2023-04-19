@@ -10,10 +10,12 @@ import { Register } from './page/register';
 import SearchFollowers from './page/SearchFollowers';
 import { SearchProvider } from './contexts/SearchContext';
 import Profile from './page/Profile';
+
 import Publication from './components/Publication';
 import { PostsProvider } from './contexts/PostContext';
 import FeedAndTrend from './components/FeedAndTrend';
 import Feed from './page/Feed';
+
 
 // [NOTE]: Secrets in the vite and react app
 // console.log('import.meta.env.VITE_FRONTEND_URL', import.meta.env.VITE_FRONTEND_URL);
@@ -45,7 +47,15 @@ export default function App() {
       <Route path="Feed" element={<Feed />} />
 
       <Route path="/navbar" element={<Navbar />} />
-      <Route path="/Profile/:username" element={<Profile />} />
+
+      <Route
+        path="/profile"
+        element={
+          <PostsProvider>
+            <Profile />
+          </PostsProvider>
+        }
+      />
     </Routes>
   );
 }
