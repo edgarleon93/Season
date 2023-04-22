@@ -1,15 +1,12 @@
-import { Routes, Route, Router, Navigate } from 'react-router-dom';
-
+import { Routes, Route, useRoutes, Router } from 'react-router-dom';
 import LogIn from './page/LogIn';
 import Index from './page/Index';
-
 import { Home } from './page/Home';
 import { Register } from './page/Register';
 import SearchFollowers from './page/SearchFollowers';
-
 import Profile from './page/Profile';
-import { useEffect, useState } from 'react';
-import { LoginForm } from './components/LogIn/LoginForm';
+import React, { useEffect, useState } from 'react';
+import { ProtectedRoute } from './services/privateRoute';
 
 // [NOTE]: Secrets in the vite and react app
 // console.log('import.meta.env.VITE_FRONTEND_URL', import.meta.env.VITE_FRONTEND_URL);
@@ -35,22 +32,34 @@ export default function App(): any {
     setToken(newToken);
     localStorage.setItem('authToken', newToken);
   };
+  const isAuthenticated = Boolean(token);
 
   return (
     <Routes>
-      {/* [NOTE]: Use the token from Login to protect all other routes on the frontend.  */}
       <Route path="/" element={<Index />} />
-
       <Route path="/login" element={<LogIn onLoginSuccess={handleLoginSuccess} />} />
-
       <Route
         path="/register"
         element={<Register onRegisterSucces={handleRegisterSuccess} />}
       />
-      <Route path="/Home" element={<Home />} />
-      <Route path="/search" element={<SearchFollowers />} />
-
-      <Route path="/profile" element={<Profile />} />
+      <Route
+        path="/home/*"
+        element={<ProtectedRoute isAuthenticated={isAuthenticated} />}
+      >
+        <Route index element={<Home />} />
+      </Route>
+      <Route
+        path="/search/*"
+        element={<ProtectedRoute isAuthenticated={isAuthenticated} />}
+      >
+        <Route index element={<SearchFollowers />} />
+      </Route>
+      <Route
+        path="/profile/*"
+        element={<ProtectedRoute isAuthenticated={isAuthenticated} />}
+      >
+        <Route index element={<Profile />} />
+      </Route>
     </Routes>
   );
 }
