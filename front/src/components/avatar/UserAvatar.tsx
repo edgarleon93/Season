@@ -35,7 +35,6 @@ export function UserAvatar({ setAvatar }: Props) {
       console.error("Erreur lors de l'envoi de l'image:", error);
     }
   };
-
   const onClick = () => {
     setAvatar(true);
     uploadImage();
