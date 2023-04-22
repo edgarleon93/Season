@@ -1,10 +1,10 @@
 import axios from 'axios';
 import FeedAndTrend from '~/components/FeedAndTrend';
 import { Navbar } from '~/components/Navbar';
+import { PostsProvider } from '~/contexts/PostContext';
+import TweetBox from '~/components/TweetBox';
 import Publication from '~/components/Publication';
 import Sidebar from '~/components/NavigateBar';
-import TweetBox from '~/components/TweetBox';
-import { PostsProvider } from '~/contexts/PostContext';
 
 export function Home() {
   return (
@@ -14,7 +14,6 @@ export function Home() {
       <div>
         <TweetBox />
       </div>
-      {/* <Publication /> */}
       <PostsProvider>
         <Publication />
       </PostsProvider>
