@@ -3,6 +3,7 @@ import SidebarRow from './SidebarRow';
 import { Home } from 'react-feather';
 import { Bell } from 'react-feather';
 import { Search } from 'react-feather';
+import AvatarPicModif from '../avatar/avatarPicModif';
 
 export function Sidebar() {
   return (
@@ -12,9 +13,7 @@ export function Sidebar() {
         <div className="flex justify-center">
           <SidebarRow Icon={Home} />
         </div>
-        <div className="flex justify-center">
-          <SidebarRow Icon={Bell} />
-        </div>
+
         <div className="flex justify-center">
           <SidebarRow Icon={Search} />
         </div>

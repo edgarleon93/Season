@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Button from '../Buttons/Button';
 import { Image } from '../Image/Image';
 import { ChevronLeft, Key } from 'react-feather';
@@ -6,6 +6,7 @@ import Input from '../Inputs/Input';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { login } from '~/services/auth';
+import { AuthContext } from '~/contexts/authContext';
 
 interface LoginFormProps {
   onLoginSuccess: (token: string) => void;
@@ -23,7 +24,6 @@ export function LoginForm({ onLoginSuccess }: LoginFormProps) {
       return updatedValues;
     });
   };
-
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
