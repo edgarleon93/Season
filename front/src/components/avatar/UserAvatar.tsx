@@ -15,18 +15,20 @@ export function UserAvatar({ setAvatar }: Props) {
   const { token } = useContext(AuthContext);
 
   const uploadImage = async () => {
-    if (!userImage) return;
+    if (!userImage || !token) return;
+
     const formData = new FormData();
     formData.append('image', userImage);
+
     try {
-      // Vous devrez remplacer {id} par l'ID réel de l'utilisateur.
+      // Remplacez {userId} par l'ID réel de l'utilisateur
       await axios.put(
-        `https://season-app-hbxam.ondigitalocean.app/profile-pic/{_id}`,
+        `https://season-app-hbxam.ondigitalocean.app/profile-pic/{userId}`,
         formData,
         {
           headers: {
             'Content-Type': 'multipart/form-data',
-            Authorization: `Bearer ${token}`, // Utilisez le token de l'utilisateur
+            Authorization: `Bearer ${token}`,
           },
         },
       );
@@ -35,6 +37,7 @@ export function UserAvatar({ setAvatar }: Props) {
       console.error("Erreur lors de l'envoi de l'image:", error);
     }
   };
+
   const onClick = () => {
     setAvatar(true);
     uploadImage();

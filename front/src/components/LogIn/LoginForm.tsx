@@ -24,6 +24,7 @@ export function LoginForm({ onLoginSuccess }: LoginFormProps) {
       return updatedValues;
     });
   };
+
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
