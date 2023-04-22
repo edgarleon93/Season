@@ -20,15 +20,15 @@ const IconButton: React.FC<ButtonComponentProps> = ({ type, onClick }) => {
 
   if (type === 'heart') {
     return (
-      <button className={buttonStyle} onClick={handleHeartClick}>
+      <span className={buttonStyle} onClick={handleHeartClick}>
         <Heart color={isHeartRed ? 'red' : 'white'} />
-      </button>
+      </span>
     );
   } else if (type === 'messageSquare') {
     return (
-      <button className={buttonStyle} onClick={onClick}>
+      <span className={buttonStyle} onClick={onClick}>
         <MessageSquare color="white" />
-      </button>
+      </span>
     );
   }
 
