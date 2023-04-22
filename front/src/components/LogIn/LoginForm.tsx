@@ -5,9 +5,12 @@ import { ChevronLeft, Key } from 'react-feather';
 import Input from '../Inputs/Input';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { API_URL, useAuth } from '~/contexts/Auth';
+import { login } from '~/services/auth';
 
-export function LoginForm() {
+interface LoginFormProps {
+  onLoginSuccess: (token: string) => void;
+}
+export function LoginForm({ onLoginSuccess }: LoginFormProps) {
   const [values, setValues] = useState({
     username: '',
     password: '',
@@ -20,15 +23,26 @@ export function LoginForm() {
       return updatedValues;
     });
   };
-  const handleSubmit = async (event) => {
+  // const handleSubmit = async (event) => {
+  //   event.preventDefault();
+  //   axios
+  //     .post('https://season-app-hbxam.ondigitalocean.app/login', values)
+  //     .then((res) => {
+  //       console.log(res);
+  //       navigate('/Home');
+  //     })
+  //     .catch((err) => console.log(err));
+  // };
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    axios
-      .post('https://season-app-hbxam.ondigitalocean.app/login', values)
-      .then((res) => {
-        console.log(res);
-        navigate('/Home');
-      })
-      .catch((err) => console.log(err));
+    try {
+      const { token } = await login(values);
+      console.log('Login successful:', token);
+      onLoginSuccess(token);
+      navigate('/Home');
+    } catch (error) {
+      console.error('Login failed:', error);
+    }
   };
 
   const navigate = useNavigate();
