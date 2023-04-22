@@ -31,6 +31,10 @@ export default function App(): any {
     setToken(newToken);
     localStorage.setItem('authToken', newToken);
   };
+  const handleRegisterSuccess = (newToken: string) => {
+    setToken(newToken);
+    localStorage.setItem('authToken', newToken);
+  };
 
   return (
     <Routes>
@@ -39,7 +43,10 @@ export default function App(): any {
 
       <Route path="/login" element={<LogIn onLoginSuccess={handleLoginSuccess} />} />
 
-      <Route path="/register" element={<Register />} />
+      <Route
+        path="/register"
+        element={<Register onRegisterSucces={handleRegisterSuccess} />}
+      />
       <Route path="/Home" element={<Home />} />
       <Route path="/search" element={<SearchFollowers />} />
 

@@ -23,16 +23,7 @@ export function LoginForm({ onLoginSuccess }: LoginFormProps) {
       return updatedValues;
     });
   };
-  // const handleSubmit = async (event) => {
-  //   event.preventDefault();
-  //   axios
-  //     .post('https://season-app-hbxam.ondigitalocean.app/login', values)
-  //     .then((res) => {
-  //       console.log(res);
-  //       navigate('/Home');
-  //     })
-  //     .catch((err) => console.log(err));
-  // };
+
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
@@ -57,7 +48,7 @@ export function LoginForm({ onLoginSuccess }: LoginFormProps) {
   };
 
   const ForgotPassword = () => {
-    window.location.href = '/ForgotPassword';
+    navigate('/ForgotPassword');
   };
 
   return (

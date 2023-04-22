@@ -4,9 +4,12 @@ import { ChevronLeft } from 'react-feather';
 import { useNavigate } from 'react-router-dom';
 import Button from '~/components/Buttons/Button';
 import Input from '~/components/Inputs/Input';
-import { useFetch } from '~/hooks/useFetch';
+import { register } from '~/services/auth';
 
-export function Register() {
+interface RegisterProps {
+  onRegisterSucces: (token: string) => void;
+}
+export function Register({ onRegisterSucces }: RegisterProps) {
   const [values, setValues] = useState({
     username: '',
     email: '',
@@ -23,15 +26,16 @@ export function Register() {
     });
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    axios
-      .post('https://season-app-hbxam.ondigitalocean.app/register', values)
-      .then((res) => {
-        console.log(res);
-        navigate('/Home');
-      })
-      .catch((err) => console.log(err));
+    try {
+      const { token } = await register(values);
+      console.log('Login successful:', token);
+      onRegisterSucces(token);
+      navigate('/Home');
+    } catch (error) {
+      console.error('Login failed:', error);
+    }
   };
 
   const BackLogIn = () => {
