@@ -32,14 +32,14 @@ export function Register({ onRegisterSucces }: RegisterProps) {
       const { token } = await register(values);
       console.log('Login successful:', token);
       onRegisterSucces(token);
-      navigate('/Home');
+      navigate('/avatar');
     } catch (error) {
       console.error('Login failed:', error);
     }
   };
 
   const BackLogIn = () => {
-    window.location.href = '/LogIn';
+    navigate('/LogIn');
   };
 
   return (

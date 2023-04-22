@@ -1,17 +1,46 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import AvatarPicModif from './avatarPicModif';
 import Button from '../Buttons/Button';
+import { AuthContext } from '~/contexts/authContext';
 
 interface Props {
   setAvatar: Dispatch<SetStateAction<boolean>>;
-  setStep: Dispatch<SetStateAction<number>>;
 }
 
-function StepTwo({ setAvatar, setStep }: Props) {
+export function UserAvatar({ setAvatar }: Props) {
+  const [userImage, setUserImage] = useState<File | null>(null);
+  const navigate = useNavigate();
+  const { token } = useContext(AuthContext);
+
+  const uploadImage = async () => {
+    if (!userImage) return;
+    const formData = new FormData();
+    formData.append('image', userImage);
+    try {
+      // Vous devrez remplacer {id} par l'ID réel de l'utilisateur.
+      await axios.put(
+        `https://season-app-hbxam.ondigitalocean.app/profile-pic/{_id}`,
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${token}`, // Utilisez le token de l'utilisateur
+          },
+        },
+      );
+      navigate('/Home');
+    } catch (error) {
+      console.error("Erreur lors de l'envoi de l'image:", error);
+    }
+  };
+
   const onClick = () => {
     setAvatar(true);
-    setStep(3);
+    uploadImage();
   };
+
   return (
     <>
       <div className="sm:flex">
@@ -31,7 +60,7 @@ function StepTwo({ setAvatar, setStep }: Props) {
                 Choose your profile picture
               </h2>
               <div className="mt-10 flex flex-wrap justify-center">
-                <AvatarPicModif />
+                <AvatarPicModif setUserImage={setUserImage} />
               </div>
               <div className="flex justify-center">
                 <Button variant="tertiary" onClick={onClick}>
@@ -45,5 +74,3 @@ function StepTwo({ setAvatar, setStep }: Props) {
     </>
   );
 }
-
-export default StepTwo;

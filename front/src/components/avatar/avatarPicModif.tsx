@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
 import defaultProfilePic from '/img/avatar1.webp';
 
-function AvatarPicModif() {
+interface Props {
+  setUserImage: (image: File | null) => void;
+}
+
+function AvatarPicModif({ setUserImage }: Props) {
   const [picture, setPicture] = useState(defaultProfilePic);
 
   const handlePictureUpload = (event) => {
     const uploadedPicture = URL.createObjectURL(event.target.files[0]);
     setPicture(uploadedPicture);
+    setUserImage(event.target.files[0]);
   };
 
   return (
