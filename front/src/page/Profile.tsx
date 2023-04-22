@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Button from '~/components/Buttons/Button';
 import IconButton from '~/components/Buttons/IconButton';
 import { Navbar } from '~/components/Navbar';
-import Sidebar from '~/components/Sidebar';
+import Sidebar from '~/components/NavigateBar';
 
 const Profile = () => {
   const [userData, setUserData] = useState<any>(null);
