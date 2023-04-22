@@ -3,7 +3,7 @@ import React from 'react';
 interface Props {
   title: string;
 }
-export default function Sidebar(props: Props) {
+export default function NavigateBar(props: Props) {
   return (
     <>
       <div className=" mt-2 flex place-content-around border-t border-b border-white pt-1 pb-1">
