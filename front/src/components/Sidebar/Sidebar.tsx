@@ -30,11 +30,11 @@ export function Sidebar() {
       <hr className="my-2 text-white"></hr>
       {avatarUrl ? (
         <div className="container mx-auto grid grid-cols-3 px-4 py-4">
-          <div className="flex justify-center">
+          <div className="mt-2.5 flex justify-center">
             <SidebarRow Icon={Home} />
           </div>
 
-          <div className="flex justify-center">
+          <div className="mt-2.5 flex justify-center">
             <SidebarRow Icon={Search} />
           </div>
           <div className=" flex justify-center">
