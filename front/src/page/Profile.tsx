@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import Button from '~/components/Buttons/Button';
 import IconButton from '~/components/Buttons/IconButton';
 import { Navbar } from '~/components/Navbar';
+import PostsAndLikes from '~/components/PostsAndLikes';
+import { Sidebar } from '~/components/Sidebar/Sidebar';
 import NavigateBar from '~/components/navigateBar';
 
 const Profile = () => {
@@ -76,30 +78,10 @@ const Profile = () => {
 
     // Ajouter cette ligne pour appeler fetchLikedPosts
     fetchLikedPosts();
-
     async function fetchLikedPosts() {
       try {
-        // 1. Récupérer tous les posts
-        const allPostsResponse = await axios.get(`${baseURL}/all/posts`);
-        console.log('All posts response:', allPostsResponse.data);
-        const allPosts = allPostsResponse.data.posts;
-
-        // 2. Initialiser un tableau vide pour stocker les posts aimés par l'utilisateur
-        const fetchedLikedPosts = [];
-
-        // 3. Pour chaque post, vérifier si l'utilisateur l'a aimé
-        for (const post of allPosts) {
-          const postId = post._id;
-          const postLikesResponse = await axios.get(
-            `${baseURL}/all/likes/post/${postId}`,
-          );
-          const postLikes = postLikesResponse.data.post.likes;
-
-          // 4. Si l'utilisateur a aimé le post, l'ajouter au tableau fetchedLikedPosts
-          if (postLikes.includes(userData._id)) {
-            fetchedLikedPosts.push(post);
-          }
-        }
+        const response = await axios.get(`${baseURL}/all/likes/user/${userData._id}`);
+        const fetchedLikedPosts = response.data.posts;
 
         fetchedLikedPosts.sort(
           (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
@@ -114,6 +96,7 @@ const Profile = () => {
         console.log(error);
       }
     }
+
     fetchLikedPosts();
   }, [userData]);
 
@@ -159,75 +142,13 @@ const Profile = () => {
         )}
       </div>
       <div className="mt-12">
-        <NavigateBar title="Posts" />
+        <PostsAndLikes
+          userData={userData}
+          userPosts={userPosts}
+          userLikedPosts={userLikedPosts}
+        />
       </div>
-      {userPosts.map((post) => (
-        <div className="mx-2 flex border-b border-white p-2 pt-4 md:px-16" key={post._id}>
-          <img
-            className="mr-4 h-12 w-12 rounded-full"
-            src={userData.profilePic}
-            alt="Avatar"
-          />
-          <div className="flex-1">
-            <div className="mb-2 flex items-center">
-              <p className="mb-4 mt-2 mr-2 text-xl font-extrabold text-white">
-                {userData.username}
-              </p>
-            </div>
-            <p className="mb-4 text-white">{post.text}</p>
-            <div>
-              <div className="flex items-center justify-end">
-                <button className=" text-white hover:text-white">
-                  <IconButton type="heart" onClick={() => console.log('heart clicked')} />
-                  <span className="ml-1">{post.likes.length}</span>
-                </button>
-                <button className="mx-2 text-white hover:text-white">
-                  <IconButton
-                    type="messageSquare"
-                    onClick={() => console.log('messageSquare clicked')}
-                  />
-                  <span className="ml-1">{post.comments.length}</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      ))}
-      <div className="mt-12">
-        <NavigateBar title="Likes" />
-      </div>
-      {userLikedPosts.map((post) => (
-        <div className="mx-2 flex border-b border-white p-2 pt-4 md:px-16" key={post._id}>
-          <img
-            className="mr-4 h-12 w-12 rounded-full"
-            src={userData.profilePic}
-            alt="Avatar"
-          />
-          <div className="flex-1">
-            <div className="mb-2 flex items-center">
-              <p className="mb-4 mt-2 mr-2 text-xl font-extrabold text-white">
-                {userData.username}
-              </p>
-            </div>
-            <p className="mb-4 text-white">{post.text}</p>
-            <div>
-              <div className="flex items-center justify-end">
-                <button className=" text-white hover:text-white">
-                  <IconButton type="heart" onClick={() => console.log('heart clicked')} />
-                  <span className="ml-1">{post.likes.length}</span>
-                </button>
-                <button className="mx-2 text-white hover:text-white">
-                  <IconButton
-                    type="messageSquare"
-                    onClick={() => console.log('messageSquare clicked')}
-                  />
-                  <span className="ml-1">{post.comments.length}</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      ))}
+      <Sidebar />
     </>
   );
 };

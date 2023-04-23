@@ -1,13 +1,14 @@
-import FeedAndTrend from '~/components/FeedAndTrend';
+import FeedAndTrend from '~/components/PostsAndLikes';
 import { Navbar } from '~/components/Navbar';
 import Publication from '~/components/Publication';
 import TweetBox from '~/components/TweetBox';
+import NavigateBar from '~/components/navigateBar';
 
 function Feed() {
   return (
     <>
       <Navbar />
-      <FeedAndTrend />
+      <NavigateBar title="FEED" />
       <TweetBox />
       <Publication />
     </>
