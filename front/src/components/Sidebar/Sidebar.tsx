@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import SidebarRow from './SidebarRow';
 import { Home } from 'react-feather';
 import { Bell } from 'react-feather';
 import { Search } from 'react-feather';
-import AvatarPicModif from '../avatar/avatarPicModif';
 import { AvatarDropdown } from '../avatar/avatarDropdown';
 import axios from 'axios';
+import { SidebarContext, SidebarRow } from './SidebarRow';
 
 export function Sidebar() {
   const [avatarUrl, setAvatarUrl] = useState<any>(null);
@@ -30,13 +29,15 @@ export function Sidebar() {
       <hr className="my-2 text-white"></hr>
       {avatarUrl ? (
         <div className="container mx-auto grid grid-cols-3 px-4 py-4">
-          <div className="mt-2.5 flex justify-center">
-            <SidebarRow Icon={Home} />
-          </div>
+          <SidebarContext>
+            <a href="/Home" className="mt-2.5 flex justify-center">
+              <SidebarRow id="home" Icon={Home} />
+            </a>
 
-          <div className="mt-2.5 flex justify-center">
-            <SidebarRow Icon={Search} />
-          </div>
+            <a href="/search" className="mt-2.5 flex justify-center">
+              <SidebarRow id="search" Icon={Search} />
+            </a>
+          </SidebarContext>
           <div className=" flex justify-center">
             <AvatarDropdown imgSrc={avatarUrl.profilePic} />
           </div>
