@@ -37,17 +37,19 @@ function Publication() {
           });
         }
 
-        const postsWithUserData = fetchedPosts.map((post) => {
-          if (!post.userId) {
-            return null;
-          }
+        const postsWithUserData = fetchedPosts
+          .map((post) => {
+            if (!post.userId) {
+              return null;
+            }
 
-          const userData = usersById[post.userId._id];
-          if (userData) {
-            post.userData = userData;
-          }
-          return post;
-        }).filter(post => post !== null);
+            const userData = usersById[post.userId._id];
+            if (userData) {
+              post.userData = userData;
+            }
+            return post;
+          })
+          .filter((post) => post !== null);
 
         if (Array.isArray(postsWithUserData)) {
           setPosts(postsWithUserData);
@@ -70,7 +72,7 @@ function Publication() {
     setPosts((prevPosts) =>
       prevPosts.map((post) => {
         if (post._id === postId) {
-          return { ...post, likes: [...post.likes, "dummyUserId"] };
+          return { ...post, likes: [...post.likes, 'dummyUserId'] };
         }
         return post;
       }),
@@ -90,7 +92,7 @@ function Publication() {
         {},
         {
           headers: {
-            'Authorization': `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
           },
         },
       );
@@ -125,18 +127,18 @@ function Publication() {
             <div>
               <div className="flex items-center justify-end">
                 <button
-                  className="text-white hover:text-white flex items-center"
+                  className="flex items-center text-white hover:text-white"
                   onClick={() => handleLikePost(post._id)}
                 >
                   <IconButton type="heart" />
-                  <span className="text-white ml-1">{post.likes.length}</span>
+                  <span className="ml-1 text-white">{post.likes.length}</span>
                 </button>
                 <button
-                  className="mx-2 text-white hover:text-white flex items-center"
+                  className="mx-2 flex items-center text-white hover:text-white"
                   onClick={() => openComments(post._id)}
                 >
                   <IconButton type="messageSquare" />
-                  <span className="text-white ml-1">{post.comments.length}</span>
+                  <span className="ml-1 text-white">{post.comments.length}</span>
                 </button>
               </div>
             </div>
@@ -144,9 +146,9 @@ function Publication() {
         </div>
       ))}
       {visiblePosts < posts.length && (
-        <div className="text-center my-4">
+        <div className="my-4 text-center">
           <button
-            className="bg-blue-500 hover:bg-blue-700 text-white rounded-2xl font-bold py-2 px-4"
+            className="rounded-2xl bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-700"
             onClick={loadMorePosts}
           >
             Show More
@@ -157,4 +159,3 @@ function Publication() {
   );
 }
 export default Publication;
-
