@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Home } from 'react-feather';
-import { Bell } from 'react-feather';
 import { Search } from 'react-feather';
 import { AvatarDropdown } from '../avatar/avatarDropdown';
 import axios from 'axios';
@@ -30,7 +29,7 @@ export function Sidebar() {
     }
   }, []);
   return (
-    <div className="bg-bg fixed bottom-0 w-full">
+    <div className=" bg-bg fixed bottom-0 w-full">
       <hr className=" text-white"></hr>
       {avatarUrl ? (
         <div className="container mx-auto grid grid-cols-3 px-4 py-4">
@@ -48,7 +47,7 @@ export function Sidebar() {
           </div>
         </div>
       ) : (
-        <p> loading</p>
+        <p className="text-center text-white"> loading</p>
       )}
     </div>
   );
