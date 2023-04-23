@@ -12,18 +12,19 @@ interface Props {
 export function UserAvatar({ setAvatar }: Props) {
   const [userImage, setUserImage] = useState<File | null>(null);
   const navigate = useNavigate();
-  const { token } = useContext(AuthContext);
+  const { token, userId } = useContext(AuthContext); // Ajouter "userId" ici
+  console.log('User ID:', userId);
 
   const uploadImage = async () => {
-    if (!userImage || !token) return;
+    if (!userImage || !token || !userId) return; // Ajoutez la vérification pour userId
 
     const formData = new FormData();
-    formData.append('image', userImage);
+    formData.append('profilePic', userImage); // Change 'image' to 'profilePic'
 
     try {
       // Remplacez {userId} par l'ID réel de l'utilisateur
       await axios.put(
-        `https://season-app-hbxam.ondigitalocean.app/profile-pic/{userId}`,
+        `https://season-app-hbxam.ondigitalocean.app/profile-pic/${userId}`, // Remplacer "{userId}" par la variable "userId"
         formData,
         {
           headers: {

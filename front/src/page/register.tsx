@@ -1,10 +1,11 @@
 import axios from 'axios';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { ChevronLeft } from 'react-feather';
 import { useNavigate } from 'react-router-dom';
 import Button from '~/components/Buttons/Button';
 import Input from '~/components/Inputs/Input';
 import { register } from '~/services/auth';
+import { AuthContext } from '~/contexts/authContext';
 
 interface RegisterProps {
   onRegisterSucces: (token: string) => void;
@@ -16,6 +17,7 @@ export function Register({ onRegisterSucces }: RegisterProps) {
     password: '',
     confirmPassword: '',
   });
+  const { setUserId } = useContext(AuthContext); // Ajoutez cette ligne pour obtenir setUserId à partir du contexte
 
   const navigate = useNavigate();
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,7 +31,7 @@ export function Register({ onRegisterSucces }: RegisterProps) {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
-      const { token } = await register(values);
+      const { token } = await register(values, setUserId); // Passez setUserId à la fonction register
       console.log('Login successful:', token);
       onRegisterSucces(token);
       navigate('/avatar');

@@ -20,13 +20,15 @@ import { AuthContext } from './contexts/authContext';
 // );
 export default function App(): any {
   const [token, setToken] = useState('');
+  const [userId, setUserId] = useState(() => localStorage.getItem('userId') || '');
 
   useEffect(() => {
-    const storedToken = localStorage.getItem('authToken');
-    if (storedToken) {
-      setToken(storedToken);
+    const storedUserId = localStorage.getItem('userId');
+    if (storedUserId) {
+      setUserId(storedUserId);
     }
   }, []);
+
   const handleLoginSuccess = (newToken: string) => {
     setToken(newToken);
     localStorage.setItem('authToken', newToken);
@@ -38,7 +40,7 @@ export default function App(): any {
   const isAuthenticated = Boolean(token);
 
   return (
-    <AuthContext.Provider value={{ token, setToken }}>
+    <AuthContext.Provider value={{ token, setToken, userId, setUserId }}>
       <Routes>
         <Route path="/" element={<Index />} />
 
