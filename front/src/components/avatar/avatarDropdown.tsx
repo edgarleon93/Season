@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { ActiveIconContext } from '../Sidebar/SidebarRow';
+import Logout from '../Logout';
 interface AvatarDropdownProps {
   imgSrc: string;
 }
@@ -48,9 +49,7 @@ export const AvatarDropdown: React.FC<AvatarDropdownProps> = ({ imgSrc }) => {
               </a>
             </li>
             <li>
-              <a href="/logout" className="text-bg block px-4 py-2">
-                Log out
-              </a>
+              <Logout />
             </li>
           </ul>
         </div>
