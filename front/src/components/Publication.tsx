@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import IconButton from './Buttons/IconButton';
 import axios from 'axios';
 import { usePosts } from '../contexts/PostContext';
@@ -15,6 +15,7 @@ async function fetchAllUsers() {
 
 function Publication() {
   const { posts, setPosts } = usePosts();
+  const [visiblePosts, setVisiblePosts] = useState(50);
 
   useEffect(() => {
     async function fetchPosts() {
@@ -24,7 +25,6 @@ function Publication() {
         );
         const fetchedPosts = response.data.posts;
 
-        // Trier les posts par date
         fetchedPosts.sort(
           (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
         );
@@ -62,33 +62,80 @@ function Publication() {
     fetchPosts();
   }, [setPosts]);
 
+  const loadMorePosts = () => {
+    setVisiblePosts((prevVisiblePosts) => prevVisiblePosts + 50);
+  };
+
+  const updatePostLikes = (postId) => {
+    setPosts((prevPosts) =>
+      prevPosts.map((post) => {
+        if (post._id === postId) {
+          return { ...post, likes: [...post.likes, "dummyUserId"] };
+        }
+        return post;
+      }),
+    );
+  };
+
+  async function handleLikePost(postId) {
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        console.error('No authentication token found');
+        return;
+      }
+
+      const response = await axios.patch(
+        `https://season-app-hbxam.ondigitalocean.app/post/like/${postId}`,
+        {},
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        },
+      );
+
+      console.log('Like post response:', response);
+    } catch (error) {
+      console.error('Failed to like post:', error);
+    }
+  }
+
+  const openComments = (postId) => {
+    // Remplacez cette ligne par la navigation vers la page des commentaires
+    console.log(`Open comments for post ID: ${postId}`);
+  };
+
   return (
     <>
-      {posts.map((post) => (
+      {posts.slice(0, visiblePosts).map((post) => (
         <div className="mx-2 flex border-b border-white p-2 pt-4" key={post._id}>
           <img
             className="mr-4 h-12 w-12 rounded-full"
-            src={post.userData?.profilePic || ''}
+            src={post.userData?.profilePic}
             alt="Avatar"
           />
           <div className="flex-1">
             <div className="mb-2 flex items-center">
               <p className="mb-4 mt-2 mr-2 text-xl font-extrabold text-white">
-                {post.userData?.username || 'John Doe'}
+                {post.userData?.username}
               </p>
             </div>
             <p className="mb-4 text-white">{post.text}</p>
             <div>
               <div className="flex items-center justify-end">
-                <button className="text-white hover:text-white flex items-center">
-                  <IconButton type="heart" onClick={() => console.log('heart clicked')} />
+                <button
+                  className="text-white hover:text-white flex items-center"
+                  onClick={() => handleLikePost(post._id)}
+                >
+                  <IconButton type="heart" />
                   <span className="text-white ml-1">{post.likes.length}</span>
                 </button>
-                <button className="mx-2 text-white hover:text-white flex items-center">
-                  <IconButton
-                    type="messageSquare"
-                    onClick={() => console.log('messageSquare clicked')}
-                  />
+                <button
+                  className="mx-2 text-white hover:text-white flex items-center"
+                  onClick={() => openComments(post._id)}
+                >
+                  <IconButton type="messageSquare" />
                   <span className="text-white ml-1">{post.comments.length}</span>
                 </button>
               </div>
@@ -96,7 +143,18 @@ function Publication() {
           </div>
         </div>
       ))}
+      {visiblePosts < posts.length && (
+        <div className="text-center my-4">
+          <button
+            className="bg-blue-500 hover:bg-blue-700 text-white rounded-2xl font-bold py-2 px-4"
+            onClick={loadMorePosts}
+          >
+            Show More
+          </button>
+        </div>
+      )}
     </>
   );
 }
 export default Publication;
+
