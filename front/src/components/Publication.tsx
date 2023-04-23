@@ -66,44 +66,36 @@ function Publication() {
     setVisiblePosts((prevVisiblePosts) => prevVisiblePosts + 50);
   };
 
-  const updatePostLikes = (postId) => {
-    setPosts((prevPosts) =>
-      prevPosts.map((post) => {
-        if (post._id === postId) {
-          return { ...post, likes: [...post.likes, "dummyUserId"] };
-        }
-        return post;
-      }),
-    );
-  };
-
-  async function handleLikePost(postId) {
+  const toggleLike = async (postId) => {
     try {
-      const token = localStorage.getItem('token');
-      if (!token) {
-        console.error('No authentication token found');
+      const authToken = localStorage.getItem('authToken');
+      if (!authToken) {
+        console.error('User is not authenticated');
         return;
       }
 
       const response = await axios.patch(
         `https://season-app-hbxam.ondigitalocean.app/post/like/${postId}`,
         {},
-        {
-          headers: {
-            'Authorization': `Bearer ${token}`,
-          },
-        },
+        { headers: { Authorization: `Bearer ${authToken}` } }
       );
 
-      console.log('Like post response:', response);
-    } catch (error) {
-      console.error('Failed to like post:', error);
-    }
-  }
+      // Update local likes count
+      const updatedPosts = posts.map((post) => {
+        if (post._id === postId) {
+          if (response.data.message === 'Liked') {
+            return { ...post, likes: [...post.likes, localStorage.getItem('username')] };
+          } else if (response.data.message === 'Unliked') {
+            return { ...post, likes: post.likes.filter((like) => like !== localStorage.getItem('username')) };
+          }
+        }
+        return post;
+      });
+      setPosts(updatedPosts);
 
-  const openComments = (postId) => {
-    // Remplacez cette ligne par la navigation vers la page des commentaires
-    console.log(`Open comments for post ID: ${postId}`);
+    } catch (error) {
+      console.error('Failed to toggle like:', error);
+    }
   };
 
   return (
@@ -124,18 +116,15 @@ function Publication() {
             <p className="mb-4 text-white">{post.text}</p>
             <div>
               <div className="flex items-center justify-end">
-                <button
-                  className="text-white hover:text-white flex items-center"
-                  onClick={() => handleLikePost(post._id)}
-                >
-                  <IconButton type="heart" />
+                <button className="text-white hover:text-white flex items-center">
+                  <IconButton type="heart" onClick={() => toggleLike(post._id)} />
                   <span className="text-white ml-1">{post.likes.length}</span>
                 </button>
-                <button
-                  className="mx-2 text-white hover:text-white flex items-center"
-                  onClick={() => openComments(post._id)}
-                >
-                  <IconButton type="messageSquare" />
+                <button className="mx-2 text-white hover:text-white flex items-center">
+                  <IconButton
+                    type="messageSquare"
+                    onClick={() => console.log('messageSquare clicked')}
+                  />
                   <span className="text-white ml-1">{post.comments.length}</span>
                 </button>
               </div>
