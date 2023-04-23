@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-
+import React, { useState, useEffect, useRef, useContext } from 'react';
+import { ActiveIconContext } from '../Sidebar/SidebarRow';
 interface AvatarDropdownProps {
   imgSrc: string;
 }
@@ -7,14 +7,17 @@ interface AvatarDropdownProps {
 export const AvatarDropdown: React.FC<AvatarDropdownProps> = ({ imgSrc }) => {
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const { clearActiveIcon } = useContext(ActiveIconContext);
 
   const toggleDropdown = () => {
     setDropdownVisible(!dropdownVisible);
+    clearActiveIcon();
   };
 
   const handleClickOutside = (event: MouseEvent) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
       setDropdownVisible(false);
+      clearActiveIcon();
     }
   };
 
@@ -24,6 +27,7 @@ export const AvatarDropdown: React.FC<AvatarDropdownProps> = ({ imgSrc }) => {
       document.removeEventListener('click', handleClickOutside);
     };
   }, []);
+
   return (
     <div className="flex" ref={dropdownRef}>
       <img
