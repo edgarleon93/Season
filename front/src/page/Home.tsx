@@ -18,6 +18,7 @@ export function Home() {
 
       <PostsProvider>
         <Publication />
+        <Sidebar />
       </PostsProvider>
       <Sidebar />
     </>
