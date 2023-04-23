@@ -146,7 +146,7 @@ function Publication() {
       {visiblePosts < posts.length && (
         <div className="text-center my-4">
           <button
-            className="bg-blue-500 hover:bg-blue-700 text-white rounded-2xl font-bold py-2 px-4"
+            className="bg-blue-500 hover:bg-blue-700 text-white rounded-2xl mb-16 font-bold py-2 px-4"
             onClick={loadMorePosts}
           >
             Show More

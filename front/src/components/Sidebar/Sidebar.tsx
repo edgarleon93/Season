@@ -22,11 +22,16 @@ export function Sidebar() {
       }
     };
 
-    fetchUserData('Brandi63');
+    const loggedInUsername = localStorage.getItem('username');
+    if (loggedInUsername) {
+      fetchUserData(loggedInUsername);
+    } else {
+      console.error('Aucun nom d\'utilisateur trouvé pour l\'utilisateur connecté');
+    }
   }, []);
   return (
-    <div className=" fixed bottom-0 w-full">
-      <hr className="my-2 text-white"></hr>
+    <div className="bg-bg fixed bottom-0 w-full">
+      <hr className=" text-white"></hr>
       {avatarUrl ? (
         <div className="container mx-auto grid grid-cols-3 px-4 py-4">
           <SidebarContext>
@@ -48,3 +53,5 @@ export function Sidebar() {
     </div>
   );
 }
+
+export default Sidebar;
