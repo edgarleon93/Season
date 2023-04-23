@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from 'react';
-import Button from '../Buttons/Button';
-import { Image } from '../Image/Image';
+import Button from './Buttons/Button';
+import { Image } from './Image/Image';
 import { ChevronLeft, Key } from 'react-feather';
-import Input from '../Inputs/Input';
+import Input from './Inputs/Input';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { login } from '~/services/auth';
@@ -99,9 +99,9 @@ export function LoginForm({ onLoginSuccess }: LoginFormProps) {
                   onChange={handleInput}
                   required
                 />
-                <Button variant="fifth" onClick={ForgotPassword}>
+                {/* <Button variant="fifth" onClick={ForgotPassword}>
                   <p className="ml-36 text-xs md:pl-40">Forgot password?</p>
-                </Button>
+                </Button> */}
               </div>
             </form>
             <div className="flex justify-center">

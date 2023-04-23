@@ -42,9 +42,12 @@ const Profile = () => {
         console.log(error);
       }
     };
-
-    // fetchUserData(userData.username);
-    fetchUserData('Brandi63');
+    const loggedInUsername = localStorage.getItem('username');
+    if (loggedInUsername) {
+      fetchUserData(loggedInUsername);
+    } else {
+      console.error("Aucun nom d'utilisateur trouvé pour l'utilisateur connecté");
+    }
   }, []);
 
   useEffect(() => {

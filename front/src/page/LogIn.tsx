@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { LoginForm } from '~/components/LogIn/LoginForm';
+import { LoginForm } from '~/components/LoginForm';
 
 interface LogInProps {
   onLoginSuccess: (token: string) => void;
