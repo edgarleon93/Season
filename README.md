@@ -8,8 +8,11 @@ Season is a web application inspired by Twitter, where users can publish posts a
 
 ## Screenshots
 ![image](https://user-images.githubusercontent.com/114822626/234010500-24083d0a-0487-4032-ab4f-c79ecb4b14fc.png)
+
 ![image](https://user-images.githubusercontent.com/114822626/234010602-9376f4bc-177f-4d72-9d69-b049c2ef89a2.png)
+
 ![image](https://user-images.githubusercontent.com/114822626/234012027-af9bef3e-3fee-4e36-ac91-7909d9e2268a.png)
+
 ![image](https://user-images.githubusercontent.com/114822626/234012210-c2e3c54e-c195-470a-b278-b0999d2c3f2b.png)
 
 
