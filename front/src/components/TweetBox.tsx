@@ -1,8 +1,9 @@
 import axios from 'axios';
 import { useState, useRef, useEffect } from 'react';
 import api from '../services/api';
+import { usePosts } from '../contexts/PostContext';
 
-async function createPost(text: string, token: string) {
+async function createPost(text: string, token: string, setPosts: (updateFn: (prevPosts: any[]) => any[]) => void) {
   if (!token) {
     console.log('User not authenticated');
     return;
@@ -19,7 +20,29 @@ async function createPost(text: string, token: string) {
       }
     );
     console.log(response.data);
-  } catch (error) {
+    const savedPost = response.data.savedPost;
+    const { _id, userId, text: postText } = savedPost;
+
+    // Ajouter le nouveau post à la liste des posts
+    setPosts((prevPosts) => [
+      {
+        _id,
+        userId: {
+          _id: userId,
+        },
+        userData: {
+          _id: userId,
+          username: localStorage.getItem("username"),
+          profilePic: localStorage.getItem("profilePic") || "https://i.imgur.com/piQRIqd_d.webp?maxwidth=1520&fidelity=grand", // Utilisez storedProfilePic, et si elle n'existe pas, utilisez une chaîne vide
+        },
+        text: postText,
+        likes: [],
+        comments: [],
+      },
+      ...prevPosts,
+    ]);
+  }
+  catch (error) {
     console.log(error);
   }
 }
@@ -28,7 +51,8 @@ function TweetBox() {
   const [isActive, setIsActive] = useState(false);
   const [text, setText] = useState('');
   const textareaRef = useRef(null);
-  const storedToken = localStorage.getItem('authToken');
+  const storedToken = localStorage.getItem("authToken");
+  const { setPosts } = usePosts();
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -37,9 +61,9 @@ function TweetBox() {
       }
     }
 
-    document.addEventListener('click', handleClickOutside);
+    document.addEventListener("click", handleClickOutside);
     return () => {
-      document.removeEventListener('click', handleClickOutside);
+      document.removeEventListener("click", handleClickOutside);
     };
   }, [textareaRef]);
 
@@ -52,12 +76,11 @@ function TweetBox() {
   };
 
   const handleButtonClick = () => {
-    if (text !== '') {
-      createPost(text, storedToken);
-      setText('');
+    if (text !== "") {
+      createPost(text, storedToken, setPosts);
+      setText("");
     }
   };
-
   return (
     <div className="mt-4 flex justify-center border-b border-white pb-4">
       <div className="relative flex w-11/12 flex-col">
