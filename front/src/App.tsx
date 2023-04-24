@@ -43,6 +43,7 @@ export default function App(): any {
     <AuthContext.Provider value={{ token, setToken, userId, setUserId }}>
       <Routes>
         <Route path="/" element={<Index />} />
+        <Route path="/profile" element={<Profile />} />
 
         {/* <Route path="/avatar" element={<UserAvatar setAvatar={Boolean} />} /> */}
 
@@ -69,12 +70,12 @@ export default function App(): any {
         >
           <Route index element={<SearchFollowers />} />
         </Route>
-        <Route
+        {/* <Route
           path="/profile/*"
           element={<ProtectedRoute isAuthenticated={isAuthenticated} />}
         >
           <Route index element={<Profile />} />
-        </Route>
+        </Route> */}
       </Routes>
     </AuthContext.Provider>
   );

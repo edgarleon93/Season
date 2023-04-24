@@ -4,12 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import { ActiveIconContext } from './Sidebar/SidebarRow';
 import api from '~/services/api';
 import { AuthContext } from '~/contexts/authContext';
-// Importez AuthContext ici
 
 const Logout: React.FC = () => {
   const navigate = useNavigate();
   const { clearActiveIcon } = useContext(ActiveIconContext);
-  const { token } = useContext(AuthContext); // Récupérez le token à partir du contexte
+  const { token } = useContext(AuthContext);
 
   const handleLogout = async () => {
     try {
@@ -18,7 +17,7 @@ const Logout: React.FC = () => {
         {},
         {
           headers: {
-            Authorization: `Bearer ${token}`, // Incluez le token dans les en-têtes de la requête
+            Authorization: `Bearer ${token}`,
           },
         },
       );
