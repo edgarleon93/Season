@@ -19,7 +19,7 @@ import { AuthContext } from './contexts/authContext';
 //   import.meta.env.SUPER_SECRET_NOT_PREFIXED,
 // );
 export default function App(): any {
-  const [token, setToken] = useState('');
+  const [token, setToken] = useState(() => localStorage.getItem('authToken') || '');
   const [userId, setUserId] = useState(() => localStorage.getItem('userId') || '');
 
   useEffect(() => {

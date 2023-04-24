@@ -17,7 +17,8 @@ export async function login(data: LoginData) {
   console.log('Login response:', response);
   localStorage.setItem('authToken', response.data.token);
   localStorage.setItem('username', data.username);
-  localStorage.setItem('userId', response.data.userId); // Ajouter cette ligne
+  localStorage.setItem('userId', response.data.userId);
+  localStorage.setItem("profilePic", response.data.profilePic);
   return response.data;
 }
 
@@ -28,7 +29,7 @@ export async function register(data: RegisterData, setUserId: (userId: string | 
   localStorage.setItem('username', data.username);
   const userId = response.data.User._id;
   localStorage.setItem('userId', userId);
-  setUserId(userId); // Utilisez setUserId pour mettre à jour le contexte d'authentification
+  setUserId(userId);
   return response.data;
 }
 
