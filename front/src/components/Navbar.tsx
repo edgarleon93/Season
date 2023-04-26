@@ -18,7 +18,7 @@ export function Navbar({ dropdownItems }: NavbarProps): JSX.Element {
   };
 
   return (
-    <nav className="bg-bg px-2 py-5">
+    <nav className="bg-bg px-2 py-5 lg:ml-36">
       <div className="container mx-auto flex items-center justify-center">
         <div>
           <div
