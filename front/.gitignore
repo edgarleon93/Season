@@ -1,7 +1,0 @@
-# SECRETS
-.env
-.env.development.local
-
-
-# reporters
-html

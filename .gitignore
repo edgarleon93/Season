@@ -29,3 +29,11 @@ jest.config.js
 *.njsproj
 *.sln
 *.sw?
+
+# SECRETS
+.env
+.env.development.local
+
+
+# reporters
+html
