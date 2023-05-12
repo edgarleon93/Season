@@ -2,7 +2,7 @@ import FeedAndTrend from '~/components/PostsAndLikes';
 import { Navbar } from '~/components/Navbar';
 import Publication from '~/components/Publication';
 import TweetBox from '~/components/TweetBox';
-import NavigateBar from '~/components/navigateBar';
+import NavigateBar from '~/components/NavigateBar';
 
 function Feed() {
   return (
