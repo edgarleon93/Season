@@ -6,7 +6,7 @@ import IconButton from '~/components/Buttons/IconButton';
 import { Navbar } from '~/components/Navbar';
 import PostsAndLikes from '~/components/PostsAndLikes';
 import { Sidebar } from '~/components/Sidebar/Sidebar';
-import NavigateBar from '~/components/navigateBar';
+import NavigateBar from '~/components/NavigateBar';
 
 const Profile = () => {
   const [userData, setUserData] = useState<any>(null);
