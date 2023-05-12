@@ -37,17 +37,19 @@ function Publication() {
           });
         }
 
-        const postsWithUserData = fetchedPosts.map((post) => {
-          if (!post.userId) {
-            return null;
-          }
+        const postsWithUserData = fetchedPosts
+          .map((post) => {
+            if (!post.userId) {
+              return null;
+            }
 
-          const userData = usersById[post.userId._id];
-          if (userData) {
-            post.userData = userData;
-          }
-          return post;
-        }).filter(post => post !== null);
+            const userData = usersById[post.userId._id];
+            if (userData) {
+              post.userData = userData;
+            }
+            return post;
+          })
+          .filter((post) => post !== null);
 
         if (Array.isArray(postsWithUserData)) {
           setPosts(postsWithUserData);
@@ -77,7 +79,7 @@ function Publication() {
       const response = await axios.patch(
         `https://season-app-hbxam.ondigitalocean.app/post/like/${postId}`,
         {},
-        { headers: { Authorization: `Bearer ${authToken}` } }
+        { headers: { Authorization: `Bearer ${authToken}` } },
       );
 
       // Update local likes count
@@ -86,13 +88,17 @@ function Publication() {
           if (response.data.message === 'Liked') {
             return { ...post, likes: [...post.likes, localStorage.getItem('username')] };
           } else if (response.data.message === 'Unliked') {
-            return { ...post, likes: post.likes.filter((like) => like !== localStorage.getItem('username')) };
+            return {
+              ...post,
+              likes: post.likes.filter(
+                (like) => like !== localStorage.getItem('username'),
+              ),
+            };
           }
         }
         return post;
       });
       setPosts(updatedPosts);
-
     } catch (error) {
       console.error('Failed to toggle like:', error);
     }
@@ -101,7 +107,7 @@ function Publication() {
   return (
     <>
       {posts.slice(0, visiblePosts).map((post) => (
-        <div className="mx-2 flex border-b border-white p-2 pt-4" key={post._id}>
+        <div className="mx-2 flex border-b border-white p-2 pt-4 lg:ml-36" key={post._id}>
           <img
             className="mr-4 h-12 w-12 rounded-full"
             src={post.userData?.profilePic}
@@ -116,16 +122,16 @@ function Publication() {
             <p className="mb-4 text-white">{post.text}</p>
             <div>
               <div className="flex items-center justify-end">
-                <button className="text-white hover:text-white flex items-center">
+                <button className="flex items-center text-white hover:text-white">
                   <IconButton type="heart" onClick={() => toggleLike(post._id)} />
-                  <span className="text-white ml-1">{post.likes.length}</span>
+                  <span className="ml-1 text-white">{post.likes.length}</span>
                 </button>
-                <button className="mx-2 text-white hover:text-white flex items-center">
+                <button className="mx-2 flex items-center text-white hover:text-white">
                   <IconButton
                     type="messageSquare"
                     onClick={() => console.log('messageSquare clicked')}
                   />
-                  <span className="text-white ml-1">{post.comments.length}</span>
+                  <span className="ml-1 text-white">{post.comments.length}</span>
                 </button>
               </div>
             </div>
@@ -133,9 +139,9 @@ function Publication() {
         </div>
       ))}
       {visiblePosts < posts.length && (
-        <div className="text-center my-4">
+        <div className="my-4 text-center">
           <button
-            className="bg-blue-500 hover:bg-blue-700 text-white rounded-2xl mb-16 font-bold py-2 px-4"
+            className="mb-16 rounded-2xl bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-700"
             onClick={loadMorePosts}
           >
             Show More
@@ -146,4 +152,3 @@ function Publication() {
   );
 }
 export default Publication;
-
